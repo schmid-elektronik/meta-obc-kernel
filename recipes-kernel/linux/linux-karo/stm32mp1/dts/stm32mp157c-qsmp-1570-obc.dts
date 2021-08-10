@@ -1,0 +1,48 @@
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/*
+ * Copyright (C) 2021 Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
+ */
+
+#include "stm32mp157c-qsmp-1570.dts"
+#include "stm32mp15-karo-qsbase1.dtsi"
+#include "stm32mp15-qsmp-lcd-panel.dtsi"
+/ {
+	model = "QSMP-1570 module on OBC";
+    
+	leds {
+        compatible = "pwm-leds", "gpio-leds";
+        
+        red {
+            label = "red";
+            linux,default-trigger = "none";
+            gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 77 */
+        };
+
+        green {
+            label = "green";
+            linux,default-trigger = "none";
+            gpios = <&gpiod 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 76 */
+        };
+
+        blue {
+            label = "blue";
+            linux,default-trigger = "none";
+            gpios = <&gpioi 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 75 */
+        };
+
+        yellow {
+            label = "yellow";
+            linux,default-trigger = "none";
+            gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74 */
+        };
+    };
+    
+};
+
+&lcd_panel {
+    status = "disabled";
+};
+
+&gpu {
+	status = "okay";
+};
