@@ -6,6 +6,7 @@ SRC_URI_append_stm32mp1 = " \
 "
 
 KERNEL_FEATURES_append = "${@bb.utils.contains('DISTRO_FEATURES',"wifi"," cfg/brcmwifi.cfg","",d)}"
+KERNEL_FEATURES_append = " cfg/dp83848phy.cfg"
 
 
 KERNEL_DEVICETREE_append_qsmp-1570 = " \
