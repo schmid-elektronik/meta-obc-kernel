@@ -34,4 +34,4 @@ WARN_QA_remove = "host-user-contaminated"
 VOLATILE_LOG_DIR = "no"
 
 ROOTFS_PARTITION_SIZE ?= "${@bb.utils.contains('MACHINE_FEATURES',"nand", \
-                      65536-${IMAGE_ROOTFS_EXTRA_SPACE},128*1024,d)}"
+                      256*1024-${IMAGE_ROOTFS_EXTRA_SPACE},128*1024,d)}"

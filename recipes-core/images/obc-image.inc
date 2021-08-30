@@ -8,22 +8,28 @@ ROOTFS_POSTPROCESS_COMMAND_remove = "\
 "
 
 IMAGE_INSTALL_append = " \
+                        rpm \
                         bash \
                         canutils \
                         coreutils \
+                        c-ares \
                         dhcpcd \
                         dosfstools \
                         e2fsprogs \
                         e2fsprogs-resize2fs \
                         file \
+                        gdb \
                         gdbserver \
                         i2c-tools \
                         kmod \
+                        python3-core \
                         ldd \
                         less \
                         libstdc++ \
                         libgpiod \
                         libgpiod-tools \
+                        nfs-utils \
+                        libmodbus \
                         lsof \
                         mmc-utils \
                         ncurses \
@@ -38,12 +44,17 @@ IMAGE_INSTALL_append = " \
                         util-linux-fsck \
                         util-linux-mkfs \
                         util-linux-setterm \
+                        udev \
                         boost \
-                        mosquitto \
+                        libmosquitto1 \
+                        libmosquittopp1 \
+                        mosquitto-clients \
                         ca-certificates \
                         unzip \
                         zip \
                         iw \
+                        iptables \
+                        ufw \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"
