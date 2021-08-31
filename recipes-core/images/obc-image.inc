@@ -55,6 +55,7 @@ IMAGE_INSTALL_append = " \
                         iw \
                         iptables \
                         ufw \
+                        wpa-supplicant \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

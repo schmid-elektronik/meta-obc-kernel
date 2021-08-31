@@ -1,0 +1,11 @@
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+update_config=1
+
+network={
+        ssid="TRANS"
+        scan_ssid=1
+        key_mgmt=WPA-PSK
+        # config psk using, the wpa_passphrase utility
+        psk=238a8e6d901acec22818c67754a1ce903e26ebb448a2e3eb9c5cc81ca8b51126
+}
