@@ -23,6 +23,8 @@ DISTRO_FEATURES_append = "\
                           dhcpcd \
                           ldconfig \
                           pam \
+                          sysvinit \
+                          busybox-crond \
 "
 
 VIRTUAL-RUNTIME_base-utils-hwclock = "util-linux-hwclock"

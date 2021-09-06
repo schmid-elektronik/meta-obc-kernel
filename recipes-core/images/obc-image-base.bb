@@ -4,8 +4,6 @@ IMAGE_BASENAME = "obc-image-base"
 require obc-image.inc
 require obc-minimal.inc
 
-DISTRO_FEATURES_append = " busybox-crond"
-
 IMAGE_LINGUAS_append = " de-de"
 
 IMAGE_FEATURES_append = " ssh-server-openssh package-management"
