@@ -1,0 +1,34 @@
+diff --git a/drivers/net/phy/dp83848.c b/drivers/net/phy/dp83848.c
+index 54c7c1b44e4d..20fbfd3cdae2 100644
+--- a/drivers/net/phy/dp83848.c
++++ b/drivers/net/phy/dp83848.c
+@@ -40,7 +40,7 @@
+ static int dp83848_ack_interrupt(struct phy_device *phydev)
+ {
+ 	int err = phy_read(phydev, DP83848_MISR);
+-
++    pr_info("read MISR01: 0x%x\n", err);
+ 	return err < 0 ? err : 0;
+ }
+ 
+@@ -49,10 +49,12 @@ static int dp83848_config_intr(struct phy_device *phydev)
+ 	int control, ret;
+ 
+ 	control = phy_read(phydev, DP83848_MICR);
++    pr_info("read MICR01: 0x%x\n", control);
+ 	if (control < 0)
+ 		return control;
+ 
+ 	if (phydev->interrupts == PHY_INTERRUPT_ENABLED) {
++        pr_info("isr enabled\n");
+ 		control |= DP83848_MICR_INT_OE;
+ 		control |= DP83848_MICR_INTEN;
+ 
+@@ -74,6 +76,7 @@ static int dp83848_config_init(struct phy_device *phydev)
+ 	 * we check initial value of BMCR Auto negotiation enable bit
+ 	 */
+ 	val = phy_read(phydev, MII_BMCR);
++    pr_info("read BRMC: 0x%x\n", val);
+ 	if (!(val & BMCR_ANENABLE))
+ 		phydev->autoneg = AUTONEG_DISABLE;
+ 

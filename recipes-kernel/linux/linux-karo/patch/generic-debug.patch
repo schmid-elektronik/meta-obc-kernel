@@ -1,0 +1,68 @@
+diff --git a/drivers/net/phy/phy_device.c b/drivers/net/phy/phy_device.c
+index dd1f711140c3..5d3e6b70f279 100644
+--- a/drivers/net/phy/phy_device.c
++++ b/drivers/net/phy/phy_device.c
+@@ -1838,6 +1838,7 @@ static int genphy_config_advert(struct phy_device *phydev)
+ 		changed = 1;
+ 
+ 	bmsr = phy_read(phydev, MII_BMSR);
++	pr_info("read MII_BMSR02: 0x%x\n", bmsr);
+ 	if (bmsr < 0)
+ 		return bmsr;
+ 
+@@ -1993,6 +1994,7 @@ static int genphy_read_master_slave(struct phy_device *phydev)
+ 	phydev->master_slave_state = MASTER_SLAVE_STATE_UNKNOWN;
+ 
+ 	val = phy_read(phydev, MII_CTRL1000);
++	pr_info("read MII_CTRL1000_01: 0x%x\n", val);
+ 	if (val < 0)
+ 		return val;
+ 
+@@ -2009,6 +2011,7 @@ static int genphy_read_master_slave(struct phy_device *phydev)
+ 	}
+ 
+ 	val = phy_read(phydev, MII_STAT1000);
++	pr_info("read MII_STAT1000_01: 0x%x\n", val);
+ 	if (val < 0)
+ 		return val;
+ 
+@@ -2166,6 +2169,7 @@ EXPORT_SYMBOL(genphy_c37_config_aneg);
+ int genphy_aneg_done(struct phy_device *phydev)
+ {
+ 	int retval = phy_read(phydev, MII_BMSR);
++	pr_info("read MII_BMSR_autoneg: 0x%x\n", retval);
+ 
+ 	return (retval < 0) ? retval : (retval & BMSR_ANEGCOMPLETE);
+ }
+@@ -2184,6 +2188,7 @@ int genphy_update_link(struct phy_device *phydev)
+ 	int status = 0, bmcr;
+ 
+ 	bmcr = phy_read(phydev, MII_BMCR);
++	pr_info("read MII_BMCR_updatelink: 0x%x\n", bmcr);
+ 	if (bmcr < 0)
+ 		return bmcr;
+ 
+@@ -2281,6 +2286,7 @@ EXPORT_SYMBOL(genphy_read_lpa);
+ int genphy_read_status_fixed(struct phy_device *phydev)
+ {
+ 	int bmcr = phy_read(phydev, MII_BMCR);
++	pr_info("read MII_BMCR_statusfixed: 0x%x\n", bmcr);
+ 
+ 	if (bmcr < 0)
+ 		return bmcr;
+@@ -2462,6 +2468,7 @@ int genphy_read_abilities(struct phy_device *phydev)
+ 			       phydev->supported);
+ 
+ 	val = phy_read(phydev, MII_BMSR);
++	pr_info("read MII_BMSR01: 0x%x\n", val);
+ 	if (val < 0)
+ 		return val;
+ 
+@@ -2479,6 +2486,7 @@ int genphy_read_abilities(struct phy_device *phydev)
+ 
+ 	if (val & BMSR_ESTATEN) {
+ 		val = phy_read(phydev, MII_ESTATUS);
++	    pr_info("read MII_ESTATUS01: 0x%x\n", val);
+ 		if (val < 0)
+ 			return val;
+ 
