@@ -56,6 +56,10 @@ IMAGE_INSTALL_append = " \
                         iptables \
                         ufw \
                         wpa-supplicant \
+                        ethtool \
+                        tcpdump \
+                        util-linux \
+                        procps \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

@@ -1,0 +1,96 @@
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-stm32.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-stm32.c
+index ffaa434e075b..f7e48d3ef1e1 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-stm32.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-stm32.c
+@@ -176,7 +176,7 @@ static int stm32mp1_set_mode(struct plat_stmmacenet_data *plat_dat)
+ 		if (clk_rate == ETH_CK_F_25M && dwmac->ext_phyclk)
+ 			dwmac->enable_eth_ck = true;
+ 		val = SYSCFG_PMCR_ETH_SEL_MII;
+-		pr_debug("SYSCFG init : PHY_INTERFACE_MODE_MII\n");
++		pr_debug("stm32-dwmac-dbg SYSCFG init : PHY_INTERFACE_MODE_MII\n");
+ 		break;
+ 	case PHY_INTERFACE_MODE_GMII:
+ 		val = SYSCFG_PMCR_ETH_SEL_GMII;
+@@ -185,16 +185,20 @@ static int stm32mp1_set_mode(struct plat_stmmacenet_data *plat_dat)
+ 			dwmac->enable_eth_ck = true;
+ 			val |= SYSCFG_PMCR_ETH_CLK_SEL;
+ 		}
+-		pr_debug("SYSCFG init : PHY_INTERFACE_MODE_GMII\n");
++		pr_debug("stm32-dwmac-dbg SYSCFG init : PHY_INTERFACE_MODE_GMII\n");
+ 		break;
+ 	case PHY_INTERFACE_MODE_RMII:
+ 		val = SYSCFG_PMCR_ETH_SEL_RMII;
++        pr_info("stm32-dwmac-dbg clk_rate: %d\n", clk_rate);
++        pr_info("stm32-dwmac-dbg ref_clk_sel_reg: %d\n", dwmac->eth_ref_clk_sel_reg);
++        pr_info("stm32-dwmac-dbg ext_phyclk: %d\n", dwmac->ext_phyclk);
+ 		if ((clk_rate == ETH_CK_F_25M || clk_rate == ETH_CK_F_50M) &&
+ 		    (dwmac->eth_ref_clk_sel_reg || dwmac->ext_phyclk)) {
+ 			dwmac->enable_eth_ck = true;
++            pr_info("stm32-dwmac-dbg enable eth ck\n");
+ 			val |= SYSCFG_PMCR_ETH_REF_CLK_SEL;
+ 		}
+-		pr_debug("SYSCFG init : PHY_INTERFACE_MODE_RMII\n");
++		pr_debug("stm32-dwmac-dbg SYSCFG init : PHY_INTERFACE_MODE_RMII\n");
+ 		break;
+ 	case PHY_INTERFACE_MODE_RGMII:
+ 	case PHY_INTERFACE_MODE_RGMII_ID:
+@@ -206,10 +210,10 @@ static int stm32mp1_set_mode(struct plat_stmmacenet_data *plat_dat)
+ 			dwmac->enable_eth_ck = true;
+ 			val |= SYSCFG_PMCR_ETH_CLK_SEL;
+ 		}
+-		pr_debug("SYSCFG init : PHY_INTERFACE_MODE_RGMII\n");
++		pr_debug("stm32-dwmac-dbg SYSCFG init : PHY_INTERFACE_MODE_RGMII\n");
+ 		break;
+ 	default:
+-		pr_debug("SYSCFG init :  Do not manage %d interface\n",
++		pr_debug("stm32-dwmac-dbg SYSCFG init :  Do not manage %d interface\n",
+ 			 plat_dat->interface);
+ 		/* Do not manage others interfaces */
+ 		return -EINVAL;
+@@ -219,6 +223,7 @@ static int stm32mp1_set_mode(struct plat_stmmacenet_data *plat_dat)
+ 	regmap_write(dwmac->regmap, reg + SYSCFG_PMCCLRR_OFFSET,
+ 		     dwmac->ops->syscfg_eth_mask);
+ 
++    pr_info("stm32-dwmac-dbg SYSCON val: 0x%08x\n", val);
+ 	/* Update PMCSETR (set register) */
+ 	return regmap_update_bits(dwmac->regmap, reg,
+ 				 dwmac->ops->syscfg_eth_mask, val);
+diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+index 020300c0e408..4ef89f260f5f 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
++++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+@@ -55,7 +55,7 @@ static int watchdog = TX_TIMEO;
+ module_param(watchdog, int, 0644);
+ MODULE_PARM_DESC(watchdog, "Transmit timeout in milliseconds (default 5s)");
+ 
+-static int debug = -1;
++static int debug = 16;
+ module_param(debug, int, 0644);
+ MODULE_PARM_DESC(debug, "Message Level (-1: default, 0: no output, 16: all)");
+ 
+@@ -1103,6 +1103,7 @@ static int stmmac_phy_setup(struct stmmac_priv *priv)
+ 		return PTR_ERR(phylink);
+ 
+ 	priv->phylink = phylink;
++    pr_info("stm32-dwmac-dbg phylink: 0x%08x\n", phylink);
+ 	return 0;
+ }
+ 
+@@ -1147,7 +1148,7 @@ static void stmmac_display_tx_rings(struct stmmac_priv *priv)
+ 		else
+ 			head_tx = (void *)tx_q->dma_tx;
+ 
+-		stmmac_display_ring(priv, head_tx, priv->dma_tx_size, false);
++		stmmac_display_ring(priv, head_tx, 10 /*priv->dma_tx_size*/, false);
+ 	}
+ }
+ 
+@@ -3717,7 +3718,7 @@ static int stmmac_rx(struct stmmac_priv *priv, int limit, u32 queue)
+ 		else
+ 			rx_head = (void *)rx_q->dma_rx;
+ 
+-		stmmac_display_ring(priv, rx_head, priv->dma_rx_size, true);
++		stmmac_display_ring(priv, rx_head, 10 /*priv->dma_rx_size*/, true);
+ 	}
+ 	while (count < limit) {
+ 		unsigned int buf1_len = 0, buf2_len = 0;

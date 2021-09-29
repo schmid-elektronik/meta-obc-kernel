@@ -11,23 +11,25 @@
 	model = "QSMP-1570 module on OBC";
     
 	leds {
-        compatible = "pwm-leds", "gpio-leds";
+        compatible = "gpio-leds";
         
-        can11 {
-            label = "can11";
+        can0 {
             linux,default-trigger = "none";
             gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 77 */
+            default-state = "on";
         };
 
-        can2 {
-            label = "can2";
+        can1 {
+            label = "can1";
             linux,default-trigger = "none";
             gpios = <&gpiod 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 76 */
+            default-state = "off";
         };
 
         relay {
             label = "relay";
             linux,default-trigger = "none";
+            default-state = "keep";
             gpios = <&gpioi 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 75 */
         };
 
@@ -67,7 +69,8 @@
             pinmux = <STM32_PINMUX('G', 13, AF11)>, /* ETH1_RMII_TXD0 */
                 <STM32_PINMUX('G', 14, AF11)>, /* ETH1_RMII_TXD1 */
                 <STM32_PINMUX('B', 11, AF11)>, /* ETH1_RMII_TX_EN */
-                <STM32_PINMUX('A', 1, AF11)>,   /* ETH1_RMII_REF_CLK */
+                //<STM32_PINMUX('A', 1, AF0)>,  /* ETH_CLK */
+                <STM32_PINMUX('A', 1, AF11)>,    /* ETH1_RMII_REF_CLK */
                 <STM32_PINMUX('A', 2, AF11)>,  /* ETH1_MDIO */
                 <STM32_PINMUX('C', 1, AF11)>;  /* ETH1_MDC */
             bias-disable;
@@ -101,6 +104,14 @@
 &ethernet0 {
     pinctrl-0 = <&obc_rmii_pin>;
     pinctrl-1 = <&obc_rmii_sleep_pin>;
+
+    // provide reference clock to phy on ETH_CLK pad (PA1, AF0)
+    // st,eth-ref-clk-sel;
+    
+    snps,reset-gpio = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
+    snps,reset-active-low;
+    snps,reset-delays-us = <0 10000 80000>;
+
     phy-mode = "rmii";
     // use own phy definition, phy0 is defined in karo layers (micrel, rgmii)
     phy-handle = <&phy1>;
@@ -115,12 +126,8 @@
         // that is the phy ID, loads dp83848 driver, seems not compatble to the phy
         //compatible = "ethernet-phy-id2000.5c90";
         
-        // results in "no phy at addr", the stmmac does not accept it
+        // results in "no phy at addr", the stmmac does not accept it, why? 
         //compatible = "ethernet-phy-ieee802.3-c22";
         reg = <1>;
-
-        reset-assert-us = <10000>;
-        reset-deassert-us = <80000>;
-        reset-gpios = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
     };
 };

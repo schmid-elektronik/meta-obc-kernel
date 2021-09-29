@@ -1,0 +1,123 @@
+diff --git a/drivers/clk/clk-composite.c b/drivers/clk/clk-composite.c
+index b49ecd1b9e56..a6c8b7f0976d 100644
+--- a/drivers/clk/clk-composite.c
++++ b/drivers/clk/clk-composite.c
+@@ -338,6 +338,7 @@ struct clk_hw *clk_hw_register_composite(struct device *dev, const char *name,
+ 			struct clk_hw *gate_hw, const struct clk_ops *gate_ops,
+ 			unsigned long flags)
+ {
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	return __clk_hw_register_composite(dev, name, parent_names, NULL,
+ 					   num_parents, mux_hw, mux_ops,
+ 					   rate_hw, rate_ops, gate_hw,
+diff --git a/drivers/clk/clk-stm32mp1.c b/drivers/clk/clk-stm32mp1.c
+index bf927befe97b..90e4cbee7345 100644
+--- a/drivers/clk/clk-stm32mp1.c
++++ b/drivers/clk/clk-stm32mp1.c
+@@ -464,6 +464,7 @@ _clk_hw_register_mux(struct device *dev,
+ 
+ static int mp1_gate_clk_enable(struct clk_hw *hw)
+ {
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	if (!clk_gate_ops.is_enabled(hw))
+ 		clk_gate_ops.enable(hw);
+ 
+@@ -633,6 +634,8 @@ clk_stm32_register_composite(struct device *dev,
+ {
+ 	const struct clk_ops *mux_ops, *div_ops, *gate_ops;
+ 	struct clk_hw *mux_hw, *div_hw, *gate_hw;
++	
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 
+ 	mux_hw = NULL;
+ 	div_hw = NULL;
+@@ -683,6 +686,7 @@ clk_stm32_register_composite(struct device *dev,
+ 
+ static int mp1_mgate_clk_enable(struct clk_hw *hw)
+ {
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	struct clk_gate *gate = to_clk_gate(hw);
+ 	struct stm32_clk_mgate *clk_mgate = to_clk_mgate(gate);
+ 
+@@ -817,6 +821,7 @@ static int mp1_mgate_clk_enable_safe(struct clk_hw *hw)
+ {
+ 	struct clk_hw *composite_hw = __clk_get_hw(hw->clk);
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	clk_mmux_restore_parent(composite_hw);
+ 	mp1_mgate_clk_enable(hw);
+ 
+@@ -922,6 +927,7 @@ static int pll_enable(struct clk_hw *hw)
+ 	u32 timeout = TIMEOUT;
+ 	int bit_status = 0;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	if (clk_gate_ops.is_enabled(hw))
+ 		return 0;
+ 
+@@ -940,6 +946,7 @@ static int pll_enable(struct clk_hw *hw)
+ 
+ static void pll_disable(struct clk_hw *hw)
+ {
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	if (!clk_gate_ops.is_enabled(hw))
+ 		return;
+ 
+@@ -1044,6 +1051,7 @@ static long timer_ker_round_rate(struct clk_hw *hw, unsigned long rate,
+ {
+ 	unsigned long factor = __bestmult(hw, rate, *parent_rate);
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	return *parent_rate * factor;
+ }
+ 
+@@ -1055,6 +1063,8 @@ static int timer_ker_set_rate(struct clk_hw *hw, unsigned long rate,
+ 	unsigned long factor = __bestmult(hw, rate, parent_rate);
+ 	int ret = 0;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
++
+ 	spin_lock_irqsave(tim_ker->lock, flags);
+ 
+ 	switch (factor) {
+@@ -1081,6 +1091,8 @@ static unsigned long timer_ker_recalc_rate(struct clk_hw *hw,
+ 	u32 prescaler, timpre;
+ 	u32 mul;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
++
+ 	prescaler = readl_relaxed(tim_ker->apbdiv) & APB_DIV_MASK;
+ 
+ 	timpre = readl_relaxed(tim_ker->timpre) & TIM_PRE_MASK;
+@@ -2301,6 +2313,7 @@ static int stm32_register_hw_clk(struct device *dev,
+ 	struct clk_hw **hws;
+ 	struct clk_hw *hw = ERR_PTR(-ENOENT);
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	hws = clk_data->hws;
+ 
+ 	if (cfg->func)
+@@ -2433,6 +2446,7 @@ static int stm32_rcc_clock_init(struct device *dev, void __iomem *base,
+ 	struct clk_hw **hws;
+ 	int err, n, max_binding;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	max_binding =  data->maxbinding;
+ 
+ 	clk_data = devm_kzalloc(dev, struct_size(clk_data, hws, max_binding),
+@@ -2471,6 +2485,7 @@ static int stm32_rcc_init(struct device *dev, void __iomem *base,
+ 	const struct of_device_id *match;
+ 	int err;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	match = of_match_node(match_data, dev_of_node(dev));
+ 	if (!match) {
+ 		dev_err(dev, "match data not found\n");
+@@ -2501,6 +2516,7 @@ static int stm32mp1_rcc_init(struct device *dev)
+ 	void __iomem *rcc_base;
+ 	int ret = -ENOMEM;
+ 
++	pr_info("stm32-dwmac-clk %s\n", __func__);
+ 	rcc_base = of_iomap(dev_of_node(dev), 0);
+ 	if (!rcc_base) {
+ 		dev_err(dev, "%pOFn: unable to map resource", dev_of_node(dev));
