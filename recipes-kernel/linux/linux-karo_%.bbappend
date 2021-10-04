@@ -19,7 +19,7 @@ SRC_URI_append = " \
 
 KERNEL_FEATURES_append = "${@bb.utils.contains('DISTRO_FEATURES',"wifi"," cfg/brcmwifi.cfg","",d)}"
 KERNEL_FEATURES_append = " cfg/dp83848phy.cfg"
-
+KERNEL_FEATURES_append = " cfg/rtc.cfg"
 
 # debug only 
 #KERNEL_FEATURES_append = " cfg/trace.cfg"

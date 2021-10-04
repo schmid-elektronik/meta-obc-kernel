@@ -33,8 +33,6 @@ IMAGE_INSTALL_append = " \
                         lsof \
                         mmc-utils \
                         ncurses \
-                        ntp \
-                        ntpdate \
                         parted \
                         pciutils \
                         rsync \
@@ -60,6 +58,7 @@ IMAGE_INSTALL_append = " \
                         tcpdump \
                         util-linux \
                         procps \
+                        chrony \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

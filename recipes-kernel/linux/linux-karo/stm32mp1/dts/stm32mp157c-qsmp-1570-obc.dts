@@ -54,12 +54,27 @@
     
 };
 
+&i2c6 {
+    ds3231: ds3231@68 {
+        compatible = "maxim,ds3231";
+        reg = <0x68>;
+        #clock-cells = <1>;
+        status = "okay";
+    };
+};
+
+
+&rtc {
+    // disable on module RTC since it looses time when cutting power off
+	status = "disabled";
+};
+
 &lcd_panel {
     status = "disabled";
 };
 
 &gpu {
-    status = "okay";
+    status = "disabled";
 };
 
 
