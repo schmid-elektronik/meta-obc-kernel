@@ -1,16 +1,16 @@
 SUMMARY = "A console-only image for Ka-Ro electronics TX modules"
-IMAGE_BASENAME = "obc-image-base"
+IMAGE_BASENAME = "obc-image-fin"
 
 require obc-image.inc
 require obc-minimal.inc
 
-IMAGE_LINGUAS_append = " de-de"
+IMAGE_LINGUAS = "en-us"
 
 IMAGE_FEATURES_append = " ssh-server-openssh package-management"
 
 python extend_recipe_sysroot_append() {
     if d.getVar('DISTRO') != 'obc-base':
-        raise_sanity_error("cannot build 'obc-image-base' with DISTRO '%s'" % d.getVar('DISTRO'), d)
+        raise_sanity_error("cannot build 'obc-image-fin' with DISTRO '%s'" % d.getVar('DISTRO'), d)
 }
 
 #ROOTFS_PARTITION_SIZE = "262144"

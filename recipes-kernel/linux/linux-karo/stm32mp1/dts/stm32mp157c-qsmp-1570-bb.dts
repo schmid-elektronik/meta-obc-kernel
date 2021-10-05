@@ -1,0 +1,61 @@
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/*
+ * Copyright (C) 2021 Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
+ */
+
+#include "stm32mp157c-qsmp-1570-obc.dtsi"
+/ {
+	model = "QSMP-1570 module on OBC";
+    
+	leds {
+        compatible = "gpio-leds";
+        
+        can0 {
+            linux,default-trigger = "none";
+            gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 77 */
+            default-state = "on";
+        };
+
+        can1 {
+            label = "can1";
+            linux,default-trigger = "none";
+            gpios = <&gpiod 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 76 */
+            default-state = "off";
+        };
+
+        relay {
+            label = "relay";
+            linux,default-trigger = "none";
+            default-state = "keep";
+            gpios = <&gpioi 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 75 */
+        };
+
+        button {
+            label = "button";
+            linux,default-trigger = "none";
+            gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74 */
+        };
+
+        on24 {
+            label = "on24";
+            linux,default-trigger = "none";
+            gpios = <&gpiof 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 70 */
+        };
+
+        on5 {
+            label = "on5";
+            linux,default-trigger = "none";
+            gpios = <&gpioi 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 69 */
+        };
+    };
+    
+};
+
+&i2c6 {
+    ds3231: ds3231@68 {
+        compatible = "maxim,ds3231";
+        reg = <0x68>;
+        #clock-cells = <1>;
+        status = "okay";
+    };
+};

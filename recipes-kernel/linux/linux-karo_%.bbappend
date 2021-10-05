@@ -2,7 +2,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:${THISDIR}/${PN}/stm32mp1:"
 
 
 SRC_URI_append_stm32mp1 = " \
-    file://dts/stm32mp157c-qsmp-1570-obc.dts;subdir=git/arch/arm/boot \
+    file://dts/stm32mp157c-qsmp-1570-obc.dtsi;subdir=git/arch/arm/boot \
+    file://dts/stm32mp157c-qsmp-1570-bb.dts;subdir=git/arch/arm/boot \
+    file://dts/stm32mp157c-qsmp-1570-fin.dts;subdir=git/arch/arm/boot \
 "
 
 # some stupid printk debugging messages
@@ -23,8 +25,3 @@ KERNEL_FEATURES_append = " cfg/rtc.cfg"
 
 # debug only 
 #KERNEL_FEATURES_append = " cfg/trace.cfg"
-
-
-KERNEL_DEVICETREE_append_qsmp-1570 = " \
-    stm32mp157c-qsmp-1570-obc.dtb \
-"
