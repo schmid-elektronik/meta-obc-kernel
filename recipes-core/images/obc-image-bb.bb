@@ -2,7 +2,6 @@ SUMMARY = "A console-only image for Ka-Ro electronics TX modules"
 IMAGE_BASENAME = "obc-image-bb"
 
 require obc-image.inc
-require obc-minimal.inc
 
 IMAGE_LINGUAS = "en-us"
 
