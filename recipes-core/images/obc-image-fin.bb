@@ -7,6 +7,11 @@ IMAGE_LINGUAS = "en-us"
 
 IMAGE_FEATURES_append = " ssh-server-openssh package-management"
 
+IMAGE_INSTALL_append = " \
+    dout \
+    obcagent \
+"
+
 python extend_recipe_sysroot_append() {
     if d.getVar('DISTRO') != 'obc-base':
         raise_sanity_error("cannot build 'obc-image-fin' with DISTRO '%s'" % d.getVar('DISTRO'), d)

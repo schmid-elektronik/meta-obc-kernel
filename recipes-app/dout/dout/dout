@@ -1,0 +1,58 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          dout
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: 
+# Description:       
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
+DESC=DoutService
+
+set -e
+
+source obc_common.sh
+
+startService(){
+    DoutService\
+        -p 3003 \
+        -c $OBC_OBCCONF_FILE \
+        --log-file $OBC_LOG_PATH/ds \
+        --update-rate 10 \
+        --flush \
+        --hw-version ObcNgx \
+        --dump $OBC_LOG_PATH/dio.dump \
+        /dev/i2c-1  >> $OBC_LOG_PATH/el_ds.log 2>&1 &
+        pid=$!
+        printAllPid DoutService
+}
+
+case $1 in
+  start)
+        echo -n "Starting ${DESC}: "
+        startService
+  ;;
+  stop)
+        echo "Stopping ${DESC}: "
+        ps -e | grep ${DESC}
+        pkill ${DESC}
+  ;;
+  restart|force-reload)
+        $0 stop
+        $0 start
+  ;;
+  status)
+        ps -e | grep ${DESC}
+   ;;
+   *)
+        echo "Usage: ${DESC} {start|stop|restart|force-reload|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim:noet

@@ -1,0 +1,55 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          obcagent
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: 
+# Description:       
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
+DESC=OBCAgent
+
+set -e
+
+source obc_common.sh
+
+startService(){
+    OBCAgent \
+        -c $OBC_OBCCONF_FILE \
+        --obd-path $OBC_LOG_PATH \
+        --flush \
+        --log-level trace \
+        --log-file $OBC_LOG_PATH/agent >> $OBC_LOG_PATH/el_obd.log 2>&1 &
+        pid=$!
+        printAllPid OBCAgent
+}
+
+case $1 in
+  start)
+        echo -n "Starting ${DESC}: "
+        startService
+  ;;
+  stop)
+        echo "Stopping ${DESC}: "
+        ps -e | grep ${DESC}
+        pkill ${DESC}
+  ;;
+  restart|force-reload)
+        $0 stop
+        $0 start
+  ;;
+  status)
+        ps -e | grep ${DESC}
+   ;;
+   *)
+        echo "Usage: ${DESC} {start|stop|restart|force-reload|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim:noet
