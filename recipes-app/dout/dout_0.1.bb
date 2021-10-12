@@ -23,9 +23,7 @@ do_install () {
     install -m 0755 ${WORKDIR}/dout ${D}${sysconfdir}/init.d
 }
 
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 
 FILES_${PN} = "${sysconfdir}"
 

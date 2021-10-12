@@ -23,11 +23,9 @@ do_install () {
     install -m 0755 ${WORKDIR}/obcagent ${D}${sysconfdir}/init.d
 }
 
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 
 FILES_${PN} = "${sysconfdir}"
 
 INITSCRIPT_NAME = "obcagent"
-INITSCRIPT_PARAMS = "start 21 2 3 4 5 . stop 80 0 6 1 ."
+INITSCRIPT_PARAMS = "start 22 2 3 4 5 . stop 80 0 6 1 ."

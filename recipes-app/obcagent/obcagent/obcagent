@@ -21,6 +21,7 @@ startService(){
         -c $OBC_OBCCONF_FILE \
         --obd-path $OBC_LOG_PATH \
         --flush \
+        --obc.ip_backbone 192.168.1.110 \
         --log-level trace \
         --log-file $OBC_LOG_PATH/agent >> $OBC_LOG_PATH/el_obd.log 2>&1 &
         pid=$!
