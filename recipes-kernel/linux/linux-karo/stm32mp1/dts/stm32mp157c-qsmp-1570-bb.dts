@@ -17,38 +17,40 @@
         };
 
         can1 {
-            label = "can1";
             linux,default-trigger = "none";
             gpios = <&gpiod 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 76 */
             default-state = "off";
         };
 
         relay {
-            label = "relay";
             linux,default-trigger = "none";
-            default-state = "keep";
+            default-state = "on";
             gpios = <&gpioi 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 75 */
         };
 
         button {
-            label = "button";
             linux,default-trigger = "none";
             gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74 */
         };
 
         on24 {
-            label = "on24";
             linux,default-trigger = "none";
             gpios = <&gpiof 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 70 */
         };
 
         on5 {
-            label = "on5";
             linux,default-trigger = "none";
             gpios = <&gpioi 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 69 */
         };
     };
-    
+
+    reg_2v5: regulator-2v5 {
+        compatible = "regulator-fixed";
+        regulator-name = "2v5";
+        regulator-min-microvolt = <2500000>;
+        regulator-max-microvolt = <2500000>;
+        regulator-always-on;
+    };
 };
 
 &i2c6 {
@@ -56,6 +58,15 @@
         compatible = "maxim,ds3231";
         reg = <0x68>;
         #clock-cells = <1>;
+        status = "okay";
+    };
+
+    // TODO how to set REF_SEL bit
+    ad7991@28 {
+        compatible = "adi,ad7991";
+        reg = <0x28>;
+        vcc-supply = <&reg_3v3>;
+        vref-supply = <&reg_3v3>;
         status = "okay";
     };
 };
