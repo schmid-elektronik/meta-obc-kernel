@@ -8,10 +8,10 @@
 
 / {
 	model = "QSMP-1570 module on OBC";
-    
+
 	leds {
         compatible = "gpio-leds";
-        
+
         green {
             linux,default-trigger = "none";
             gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 77 */
@@ -37,7 +37,7 @@
         };
 
     };
-    
+
 };
 
 &i2c6 {
@@ -48,4 +48,6 @@
         status = "okay";
     };
 };
+
+
 

@@ -43,8 +43,8 @@
             bias-disable;
         };
     };
-    
-    
+
+
     obc_rmii_sleep_pin: rmii-sleep-0 {
         pins1 {
             pinmux = <STM32_PINMUX('G', 13, ANALOG)>, /* ETH1_RMII_TXD0 */
@@ -66,7 +66,7 @@
 
     // provide reference clock to phy on ETH_CLK pad (PA1, AF0)
     // st,eth-ref-clk-sel;
-    
+
     snps,reset-gpio = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
     snps,reset-active-low;
     snps,reset-delays-us = <0 10000 80000>;
@@ -81,12 +81,19 @@
     phy1: ethernet-phy@1 {
         // use generic phy driver (just a random ID)
         compatible = "ethernet-phy-idffff.fff0";
-        
+
         // that is the phy ID, loads dp83848 driver, seems not compatble to the phy
         //compatible = "ethernet-phy-id2000.5c90";
-        
-        // results in "no phy at addr", the stmmac does not accept it, why? 
+
+        // results in "no phy at addr", the stmmac does not accept it, why?
         //compatible = "ethernet-phy-ieee802.3-c22";
         reg = <1>;
     };
+};
+
+// disable programming usb, this prevents kernel from probing it
+// probing the inexistent device confuses the usb subsystem
+// in that cat usb does not always find it's devices (usb-hub, laird module)
+&usbh_ehci {
+    status = "disabled";
 };
