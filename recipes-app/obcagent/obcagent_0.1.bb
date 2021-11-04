@@ -18,8 +18,8 @@ do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
 do_install () {
-    install -d ${D}${sysconfdir}/init.d  
-    
+    install -d ${D}${sysconfdir}/init.d
+
     install -m 0755 ${WORKDIR}/obcagent ${D}${sysconfdir}/init.d
 }
 

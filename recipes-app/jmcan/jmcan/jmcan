@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          dout
+# Provides:          jmcan
 # Required-Start:
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -10,24 +10,22 @@
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
-DESC=DoutService
+DESC=JmCanService
 
 set -e
 
 source obc_common.sh
 
 startService(){
-    DoutService\
-        -p 3003 \
+    JmCanService\
+        -p 3012 \
         -c $OBC_OBCCONF_FILE \
-        --log-file $OBC_LOG_PATH/ds \
-        --update-rate 10 \
-        --flush \
-        --hw-version ObcNgx \
-        --dump $OBC_LOG_PATH/dio.dump \
-        /dev/i2c-1  >> $OBC_LOG_PATH/el_ds.log 2>&1 &
+        --log-file $OBC_LOG_PATH/canjm \
+        --update-rate 0 \
+        --jm-mode joule \
+        can0 >> $OBC_LOG_PATH/el_canjm.log 2>&1 &
         pid=$!
-        printAllPid DoutService
+        printAllPid JmCanService
 }
 
 case $1 in

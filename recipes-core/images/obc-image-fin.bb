@@ -9,6 +9,8 @@ IMAGE_FEATURES_append = " ssh-server-openssh package-management"
 
 IMAGE_INSTALL_append = " \
     dout \
+    gps \
+    mobile \
     obcagent \
 "
 
