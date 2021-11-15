@@ -19,12 +19,12 @@ source obc_common.sh
 startService(){
     SupplyMeterService\
         -p 3014 \
+        --hw-version ObcNxg \
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/ss \
-        --update-rate 10 \
-        --hw-version ObcNgx \
+        --update-rate 1 \
         --dump $OBC_LOG_PATH/supply.dump \
-        /dev/i2c-1  >> $OBC_LOG_PATH/el_ss.log 2>&1 &
+        /dev/null  >> $OBC_LOG_PATH/el_ss.log 2>&1 &
         pid=$!
         printAllPid SupplyMeter
 }
