@@ -60,6 +60,7 @@ IMAGE_INSTALL_append = " \
                         util-linux \
                         procps \
                         chrony \
+                        screen \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

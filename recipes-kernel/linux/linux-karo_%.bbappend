@@ -19,11 +19,12 @@ SRC_URI_append = " \
     file://patch/obc-pinmux.patch \
 "
 
-KERNEL_FEATURES_append = "${@bb.utils.contains('DISTRO_FEATURES',"wifi"," cfg/brcmwifi.cfg","",d)}"
-
+KERNEL_FEATURES_append = " cfg/brcmwifi.cfg"
 KERNEL_FEATURES_append = " cfg/dp83848phy.cfg"
 KERNEL_FEATURES_append = " cfg/rtc.cfg"
 KERNEL_FEATURES_append = " cfg/adc.cfg"
+KERNEL_FEATURES_append = " cfg/usb_cdc.cfg"
+KERNEL_FEATURES_append = " cfg/serial.cfg"
 
-# debug only 
+# debug only
 #KERNEL_FEATURES_append = " cfg/trace.cfg"
