@@ -23,7 +23,7 @@ startService(){
         --log-file $OBC_LOG_PATH/ms \
         --update-rate 1 \
         --dump $OBC_LOG_PATH/ms.dump \
-        /dev/ObcMobile  >> $OBC_LOG_PATH/el_ms.log 2>&1 &
+        /dev/huaweiMobile  >> $OBC_LOG_PATH/el_ms.log 2>&1 &
         pid=$!
         printAllPid MobileService
 }

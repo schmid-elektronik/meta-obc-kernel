@@ -1,0 +1,7 @@
+# udev rules for obc devices GPS (u-blox), modem (Huawei) and joulemeter(ftdi)
+
+# find deviceinfo:
+# udevadm info -ap /devices/platform/soc/5800c000.usbh-ohci/usb1/1-1/1-1.4/1-1.4:2.0
+# where the path starts in /sys/class
+
+ACTION=="add", ATTRS{interface}=="HUAWEI Mobile Connect - PC UI Interface", SYMLINK="huaweiMobile"
