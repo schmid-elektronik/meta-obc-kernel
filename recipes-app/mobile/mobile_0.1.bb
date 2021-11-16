@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293
 
 SRC_URI = " \
     file://mobile \
+    file://81-mobile.rules \
 "
 
 inherit update-rc.d
@@ -19,8 +20,10 @@ do_compile[noexec] = "1"
 
 do_install () {
     install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/udev/rules.d
 
     install -m 0755 ${WORKDIR}/mobile ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/81-mobile.rules ${D}${sysconfdir}/udev/rules.d
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
