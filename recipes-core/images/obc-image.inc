@@ -61,6 +61,7 @@ IMAGE_INSTALL_append = " \
                         procps \
                         chrony \
                         screen \
+                        picocom \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

@@ -12,6 +12,7 @@ IMAGE_INSTALL_append = " \
     jm2 \
     jmcan \
     lfm \
+    supply \
     voltcan \
 "
 
