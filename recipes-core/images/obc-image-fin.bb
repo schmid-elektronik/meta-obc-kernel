@@ -12,6 +12,7 @@ IMAGE_INSTALL_append = " \
     gps \
     mobile \
     obcagent \
+    utilities \
 "
 
 python extend_recipe_sysroot_append() {

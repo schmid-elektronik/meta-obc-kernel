@@ -14,6 +14,7 @@ IMAGE_INSTALL_append = " \
     lfm \
     supply \
     voltcan \
+    utilities \
 "
 
 python extend_recipe_sysroot_append() {

@@ -13,6 +13,7 @@ SRC_URI = " \
 "
 
 inherit update-rc.d
+inherit obc_common
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
@@ -21,11 +22,12 @@ do_install () {
     install -d ${D}${sysconfdir}/init.d
 
     install -m 0755 ${WORKDIR}/dout ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/DoutService ${D}/${OBC_PATH_BIN}
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FILES_${PN} = "${sysconfdir}"
+FILES_${PN} += "${sysconfdir}"
 
 INITSCRIPT_NAME = "dout"
 INITSCRIPT_PARAMS = "start 21 2 3 4 5 . stop 80 0 6 1 ."

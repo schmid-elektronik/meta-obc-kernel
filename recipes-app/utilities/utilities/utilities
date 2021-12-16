@@ -1,6 +1,6 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          voltcan
+# Provides:          utilities
 # Required-Start:
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -10,28 +10,16 @@
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
-DESC=VoltCanService
+DESC=utilities.sh
 
 set -e
 
 source obc_common.sh
 
-startService(){
-    VoltCanService\
-        -p 3016 \
-        -c $OBC_OBCCONF_FILE \
-        --log-file $OBC_LOG_PATH/canjm_volt \
-        --update-rate 0 \
-        --jm-mode voltage \
-        can0 >> $OBC_LOG_PATH/el_canjm_volt.log 2>&1 &
-        pid=$!
-        printAllPid VoltCanService
-}
-
 case $1 in
   start)
         echo -n "Starting ${DESC}: "
-        startService
+        ${DESC}
   ;;
   stop)
         echo "Stopping ${DESC}: "
@@ -54,3 +42,4 @@ esac
 exit 0
 
 # vim:noet
+
