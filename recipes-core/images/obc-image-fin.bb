@@ -13,7 +13,13 @@ IMAGE_INSTALL_append = " \
     mobile \
     obcagent \
     utilities \
+    kernel-module-lwb5p-backports-laird \
+    lwb5plus-usb-sa-firmware \
+    sterling-supplicant-lwb \
 "
+
+# wifi regulatory domain, use on of US, CA(canada), ETSI(europe), JP, AU, NZ
+LWB_REGDOMAIN = "ETSI"
 
 python extend_recipe_sysroot_append() {
     if d.getVar('DISTRO') != 'obc-base':

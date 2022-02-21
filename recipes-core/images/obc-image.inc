@@ -54,7 +54,6 @@ IMAGE_INSTALL_append = " \
                         iw \
                         iptables \
                         ufw \
-                        wpa-supplicant \
                         ethtool \
                         tcpdump \
                         util-linux \
