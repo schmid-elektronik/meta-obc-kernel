@@ -12,6 +12,7 @@ SRC_URI = " \
     file://utilities \
     file://utilities.sh \
     file://obc_common.sh \
+    file://dhclient_alias \
 "
 
 inherit update-rc.d
@@ -26,6 +27,7 @@ do_install_append () {
     install -m 0755 ${WORKDIR}/utilities ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/utilities.sh ${D}/${OBC_PATH_BIN}
     install -m 0755 ${WORKDIR}/obc_common.sh ${D}/${OBC_PATH_HOME}
+    install -m 0755 ${WORKDIR}/dhclient_alias ${D}/${bindir}/dhclient
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

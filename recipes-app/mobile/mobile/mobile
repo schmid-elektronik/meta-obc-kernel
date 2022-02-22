@@ -22,6 +22,7 @@ startService(){
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/ms \
         --update-rate 1 \
+        --mobile-itf usb1 \
         --dump $OBC_LOG_PATH/ms.dump \
         /dev/huaweiMobile  >> $OBC_LOG_PATH/el_ms.log 2>&1 &
         pid=$!
