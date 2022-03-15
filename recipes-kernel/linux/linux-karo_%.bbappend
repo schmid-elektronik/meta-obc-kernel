@@ -25,6 +25,7 @@ KERNEL_FEATURES_append = " cfg/rtc.cfg"
 KERNEL_FEATURES_append = " cfg/adc.cfg"
 KERNEL_FEATURES_append = " cfg/usb_cdc.cfg"
 KERNEL_FEATURES_append = " cfg/serial.cfg"
+KERNEL_FEATURES_append = " cfg/lairdmodule.cfg"
 
 # debug only
 #KERNEL_FEATURES_append = " cfg/trace.cfg"
