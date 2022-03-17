@@ -5,7 +5,7 @@ DESCRIPTION = "OBC utlilities"
 HOMEPAGE = "schmid-elektronik.ch"
 LICENSE = "GPL-3.0"
 SECTION = "base"
-DEPENDS = ""
+DEPENDS = "dhcpcd"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 
 SRC_URI = " \
@@ -13,6 +13,9 @@ SRC_URI = " \
     file://utilities.sh \
     file://obc_common.sh \
     file://dhclient_alias \
+    file://ca.crt \
+    file://obc.cnf \
+    file://startwifi.sh \
 "
 
 inherit update-rc.d
@@ -27,6 +30,17 @@ do_install_append () {
     install -m 0755 ${WORKDIR}/utilities ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/utilities.sh ${D}/${OBC_PATH_BIN}
     install -m 0755 ${WORKDIR}/obc_common.sh ${D}/${OBC_PATH_HOME}
+
+    install -m 0644 ${WORKDIR}/ca.crt ${D}/${OBC_PATH_CONF}
+    install -m 0644 ${WORKDIR}/obc.cnf ${D}/${OBC_PATH_CONF}
+}
+
+do_install_append_qsmp-1570-fin () {
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/dhclient_alias ${D}/${bindir}/dhclient
+
+
+    install -m 0755 ${WORKDIR}/startwifi.sh ${D}/${OBC_PATH_BIN}
 }
 
 #install -m 0755 ${WORKDIR}/dhclient_alias ${D}/${bindir}/dhclient
