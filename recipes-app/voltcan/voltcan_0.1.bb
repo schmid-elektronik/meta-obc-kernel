@@ -23,7 +23,7 @@ do_install_append () {
 
     install -m 0755 ${WORKDIR}/voltcan ${D}${sysconfdir}/init.d
     # NOTE, that Volt- and JmCanService are the same binary
-    install -m 0755 ${WORKDIR}/LfmCanService ${D}/${OBC_PATH_BIN}/VoltCanService
+    install -m 0755 ${WORKDIR}/JmCanService ${D}/${OBC_PATH_BIN}/VoltCanService
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
