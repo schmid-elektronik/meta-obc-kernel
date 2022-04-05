@@ -21,6 +21,7 @@ case $1 in
         echo -n "Starting ${DESC}: "
         ${DESC}
         startwifi.sh &
+	health.sh &
   ;;
   stop)
         echo "Stopping ${DESC}: "
