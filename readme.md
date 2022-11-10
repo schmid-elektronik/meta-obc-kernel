@@ -19,7 +19,7 @@ Get an Ubuntu 18.04 (20.04 does not work, yocto gatesgarth is not there). WSL2 w
 
 ```bash
 # get all used tools
-sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm python3-subunit mesa-common-dev curl python
+sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm python3-subunit mesa-common-dev curl python libncurses-dev
 
 # repotool
 mkdir ~/bin
@@ -106,6 +106,14 @@ cd tmp/deploy/sdk
 
 
 ## Flash image
+
+Install [STM32 CubeProgrammer](https://karo-electronics.github.io/docs/software-documentation/flashtools/stm32-programmer/index.html)
+
+connect USB, Serial FTDI cable and Boot Jumper as in the picture
+
+If working on WSL, consider [connecting USB to WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+
+![](./doc/flash_connections.jpg)
 
 ```bash
 # Programmer Location = /home/karo/bin/stm32_cube_programmer
