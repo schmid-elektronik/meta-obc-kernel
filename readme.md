@@ -137,3 +137,29 @@ STM32_Programmer_CLI -c port=usb1 -w flashlayout [...]
 lsblk
 mount /dev/mmcblk0p2 /boot/
 ```
+
+
+
+### Setup Karo Module
+
+When using a Karo Module for the first time. The uboot environment needs to be set manually, [since this can not be done with the STM32_Programmer](https://karo-electronics.github.io/docs/software-documentation/flashtools/stm32-programmer/index.html#u-boot-environment).
+
+```bash
+# Break into U-Boot prompt again by hitting any key.
+
+# set default environment
+env default -a
+saveenv
+reset
+
+# adapt bootargs and devicetreefile for our needs
+setenv append_bootargs 'init=/sbin/init'
+setenv dtbfile /stm32mp157c-qsmp-1570-bb.dtb
+saveenv
+
+# set use different devicetreefile for Backbone and fin
+setenv dtbfile /stm32mp157c-qsmp-1570-fin.dtb
+
+# you may want to remove the 'debug' argumnent in default_bootargs, this will print less on console
+setenv default_bootargs 'setenv bootargs console=ttySTM0,115200 ro panic=-1 loglevel=1'
+```
