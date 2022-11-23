@@ -19,7 +19,7 @@ Get an Ubuntu 18.04 (20.04 does not work, yocto gatesgarth is not there). WSL2 w
 
 ```bash
 # get all used tools
-sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm python3-subunit mesa-common-dev curl python
+sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm python3-subunit mesa-common-dev curl python libncurses-dev
 
 # repotool
 mkdir ~/bin
@@ -107,6 +107,14 @@ cd tmp/deploy/sdk
 
 ## Flash image
 
+Install [STM32 CubeProgrammer](https://karo-electronics.github.io/docs/software-documentation/flashtools/stm32-programmer/index.html)
+
+connect USB, Serial FTDI cable and Boot Jumper as in the picture
+
+If working on WSL, consider [connecting USB to WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+
+![](./doc/flash_connections.jpg)
+
 ```bash
 # Programmer Location = /home/karo/bin/stm32_cube_programmer
 # already in PATH
@@ -128,4 +136,30 @@ STM32_Programmer_CLI -c port=usb1 -w flashlayout [...]
 # or just modify those partitions directly in system, eg bootpartition
 lsblk
 mount /dev/mmcblk0p2 /boot/
+```
+
+
+
+### Setup Karo Module
+
+When using a Karo Module for the first time. The uboot environment needs to be set manually, [since this can not be done with the STM32_Programmer](https://karo-electronics.github.io/docs/software-documentation/flashtools/stm32-programmer/index.html#u-boot-environment).
+
+```bash
+# Break into U-Boot prompt again by hitting any key.
+
+# set default environment
+env default -a
+saveenv
+reset
+
+# adapt bootargs and devicetreefile for our needs
+setenv append_bootargs 'init=/sbin/init'
+setenv dtbfile /stm32mp157c-qsmp-1570-bb.dtb
+saveenv
+
+# set use different devicetreefile for Backbone and fin
+setenv dtbfile /stm32mp157c-qsmp-1570-fin.dtb
+
+# you may want to remove the 'debug' argumnent in default_bootargs, this will print less on console
+setenv default_bootargs 'setenv bootargs console=ttySTM0,115200 ro panic=-1 loglevel=1'
 ```
