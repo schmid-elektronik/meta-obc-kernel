@@ -84,18 +84,18 @@ once your set, it's easy..
 ```bash
 # on the prepared VM
 cd ~/obc-yocto/
-#DISTRO=obc-base MACHINE=qsmp-1570 source setup-environment build-obc-1570-base/
-DISTRO=obc-base MACHINE=qsmp-1570-bb source setup-environment build-obc-1570-bb/
-DISTRO=obc-base MACHINE=qsmp-1570-fin source setup-environment build-obc-1570-fin/
 
-# image
-#bitbake karo-image-base
+# set environment and build backbone
+DISTRO=obc-base MACHINE=qsmp-1570-bb source setup-environment build-obc-1570-bb/
 bitbake obc-image-bb
+
+# same for fin (make shure to use a different shell)
+DISTRO=obc-base MACHINE=qsmp-1570-fin source setup-environment build-obc-1570-fin/
 bitbake obc-image-fin
 # ---> Flash image
 
 # SDK = compiler, header, ++
-bitbake karo-image-base -c populate_sdk
+bitbake karo-image-bb -c populate_sdk
 cd tmp/deploy/sdk 
 # deploy/install sdk to /home/karo/bin/karo_sdk/
 
