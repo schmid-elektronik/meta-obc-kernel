@@ -127,7 +127,7 @@ STM32_Programmer_CLI -l usb
 
 # flash image
 # ---> set bootmode jumper
-STM32_Programmer_CLI -c port=usb1 -w flashlayout [...]
+STM32_Programmer_CLI -c port=usb1 -w flashlayout_obc-image-fin/FlashLayout_emmc_stm32mp157c-qsmp-1570-trusted.tsv
 
 # from uboot, you can mount this stuff as massstorage
 # Does not work since we removed programming usb from devicetree
