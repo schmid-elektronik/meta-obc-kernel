@@ -36,8 +36,10 @@ repo init -u https://github.com/schmid-elektronik/karo-bsp -b gatesgarth
 repo sync
 
 # copy following files to  <home>/obc-yocto/release
+# get laird releases: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/tag/LRD-REL-9.15.0.14
 laird-lwb5plus-sdio-sa-firmware-9.15.0.14.tar.bz2
 laird-lwb5plus-usb-sa-firmware-9.15.0.14.tar.bz2 
+# get obc-releases: https://github.com/schmid-elektronik/sh-p03-obc-services/releases
 obc-services-karo_1.1.8.tar.gz
 
 # set machine and build folder, initially you need to run it twice
