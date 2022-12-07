@@ -25,6 +25,10 @@ KERNEL_FEATURES_append = " cfg/rtc.cfg"
 KERNEL_FEATURES_append = " cfg/adc.cfg"
 KERNEL_FEATURES_append = " cfg/usb_cdc.cfg"
 KERNEL_FEATURES_append = " cfg/serial.cfg"
+
+# Support Alex Mohr, Laird, Friday, 11 March 2022 08:30
+# Karo for some reason decided to enable “loadable module support” differently and not in the default manner.
+# adjust your kernel config to support loadable kernel modules as states in there.
 KERNEL_FEATURES_append = " cfg/lairdmodule.cfg"
 
 # debug only
