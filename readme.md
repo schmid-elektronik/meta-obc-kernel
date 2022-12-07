@@ -111,6 +111,8 @@ cd tmp/deploy/sdk
 
 Install [STM32 CubeProgrammer](https://karo-electronics.github.io/docs/software-documentation/flashtools/stm32-programmer/index.html)
 
+When working on a Virtual Machine, make sure to use USB Controller 3.1. USB2 will be too slow to flash.
+
 connect USB, Serial FTDI cable and Boot Jumper as in the picture
 
 If working on WSL, consider [connecting USB to WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
