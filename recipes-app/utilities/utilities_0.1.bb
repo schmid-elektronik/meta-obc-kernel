@@ -12,7 +12,6 @@ SRC_URI = " \
     file://utilities \
     file://utilities.sh \
     file://obc_common.sh \
-    file://dhclient_alias \
     file://ca.crt \
     file://obc.cnf \
     file://startwifi.sh \
@@ -36,14 +35,8 @@ do_install_append () {
 }
 
 do_install_append_qsmp-1570-fin () {
-    install -d ${D}${bindir}
-    install -m 0755 ${WORKDIR}/dhclient_alias ${D}/${bindir}/dhclient
-
-
     install -m 0755 ${WORKDIR}/startwifi.sh ${D}/${OBC_PATH_BIN}
 }
-
-#install -m 0755 ${WORKDIR}/dhclient_alias ${D}/${bindir}/dhclient
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

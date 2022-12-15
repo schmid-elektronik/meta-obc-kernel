@@ -5,6 +5,8 @@ require obc-image.inc
 
 IMAGE_LINGUAS = "en-us"
 
+DISTRO_FEATURES_append = " bluetooth bluez5"
+
 IMAGE_FEATURES_append = " ssh-server-openssh package-management"
 
 IMAGE_INSTALL_append = " \
@@ -16,9 +18,6 @@ IMAGE_INSTALL_append = " \
     kernel-module-lwb5p-backports-laird \
     lwb5plus-usb-sa-firmware \
     sterling-supplicant-lwb \
-    iproute2 \
-    net-tools \
-    bash-completion \
 "
 
 # wifi regulatory domain, use on of US, CA(canada), ETSI(europe), JP, AU, NZ

@@ -61,6 +61,9 @@ IMAGE_INSTALL_append = " \
                         chrony \
                         screen \
                         picocom \
+                        iproute2 \
+                        net-tools \
+                        bash-completion \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"
