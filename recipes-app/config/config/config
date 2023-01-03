@@ -1,0 +1,41 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          mobile
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      
+# Short-Description:
+# Description:
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app:/app/conf
+DESC=config
+
+set -e
+
+source obc_common.sh
+
+startService(){
+    python3 /app/bin/configService/main.py\
+        --bb $(getserial.sh -B)\
+        --obc $(getserial.sh -f)\
+        --outfile $OBC_OBCCONF_FILE\
+        --errorfile $OBC_ERROR_CONF_FILE\
+        --interval 60  >> $OBC_LOG_PATH/el_conf.log 2>&1 &
+}
+
+case $1 in
+  start)
+        echo -n "Starting ${DESC}: "
+        startService
+   ;;
+   *)
+        echo "Usage: ${DESC} {start}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim:noet

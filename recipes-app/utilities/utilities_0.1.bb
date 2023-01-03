@@ -15,6 +15,9 @@ SRC_URI = " \
     file://ca.crt \
     file://obc.cnf \
     file://startwifi.sh \
+    file://serialbb.csv \
+    file://serialfin.csv \
+    file://getserial.sh \
 "
 
 inherit update-rc.d
@@ -32,6 +35,10 @@ do_install_append () {
 
     install -m 0644 ${WORKDIR}/ca.crt ${D}/${OBC_PATH_CONF}
     install -m 0644 ${WORKDIR}/obc.cnf ${D}/${OBC_PATH_CONF}
+
+    install -m 0644 ${WORKDIR}/serialbb.csv ${D}/${OBC_PATH_CONF}
+    install -m 0644 ${WORKDIR}/serialfin.csv ${D}/${OBC_PATH_CONF}
+    install -m 0755 ${WORKDIR}/getserial.sh ${D}/${OBC_PATH_BIN}
 }
 
 do_install_append_qsmp-1570-fin () {

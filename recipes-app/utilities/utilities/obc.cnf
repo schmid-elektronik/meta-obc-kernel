@@ -19,7 +19,7 @@ AllEnergyJM2=1000
 
 [mobile]
 pin=
-apn=gprs.swisscom.ch
+apn=super
 
 [obc]
 ip_conf_active=https://manager.sem-app.com/ws/obcmgr/config/57

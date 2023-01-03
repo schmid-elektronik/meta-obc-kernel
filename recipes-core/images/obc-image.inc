@@ -24,6 +24,8 @@ IMAGE_INSTALL_append = " \
                         i2c-tools \
                         kmod \
                         python3-core \
+                        python3-pip \
+                        python3-requests \
                         ldd \
                         less \
                         libstdc++ \

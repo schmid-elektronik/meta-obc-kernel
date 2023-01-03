@@ -6,6 +6,8 @@ OBC_SYS_LOG_PATH=/mnt/log/system.log
 
 # local obc config file
 OBC_OBCCONF_FILE=/app/conf/obc.cnf
+OBC_ERROR_CONF_FILE=/app/conf/obd_error.json
+OBC_CA_FILE=/app/conf/ca.crt
 
 #functions
 getTeamNo(){
