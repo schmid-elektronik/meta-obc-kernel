@@ -14,6 +14,7 @@ IMAGE_INSTALL_append = " \
     gps \
     mobile \
     obcagent \
+    health \
     config \
     utilities \
     kernel-module-lwb5p-backports-laird \
