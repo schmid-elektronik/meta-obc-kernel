@@ -3,7 +3,6 @@ LICENSE = "MIT"
 inherit core-image rootfs-postprocess relative_symlinks
 
 ROOTFS_POSTPROCESS_COMMAND_remove = "\
-                                     rootfs_update_timestamp; \
                                      ${bb.utils.contains('DISTRO_FEATURES','read-only-rootfs','empty_var_volatile;','',d)} \
 "
 
