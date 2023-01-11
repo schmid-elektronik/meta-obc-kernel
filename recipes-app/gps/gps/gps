@@ -21,8 +21,8 @@ startService(){
         -p 3002 \
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/gpsrtk \
-        --dump $OBC_LOG_PATH/gpsrtk.dump \
-        /dev/ttyACM0  >> $OBC_LOG_PATH/el_gpsrtk.log 2>&1 &
+        --dump $OBC_LOG_PATH/gpsrtk_$(date +%Y%m%d_%H%M).dump \
+        /dev/ttyACM0  >> $OBC_LOG_PATH/el_gpsrtk_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid GpsServiceRTK
 }

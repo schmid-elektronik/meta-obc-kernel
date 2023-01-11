@@ -21,8 +21,8 @@ startService(){
             -p 3000 \
             -c $OBC_OBCCONF_FILE \
             --log-file $OBC_LOG_PATH/gfs \
-            --dump $OBC_LOG_PATH/gfs.dump \
-            /dev/ttySTM1  >> $OBC_LOG_PATH/el_gfs.log 2>&1 &
+            --dump $OBC_LOG_PATH/gfs_$(date +%Y%m%d_%H%M).dump \
+            /dev/ttySTM1  >> $OBC_LOG_PATH/el_gfs_$(date +%Y%m%d_%H%M).log 2>&1 &
             pid=$!
             printAllPid GasFlow
 }

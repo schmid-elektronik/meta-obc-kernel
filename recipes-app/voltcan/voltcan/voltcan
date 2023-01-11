@@ -23,7 +23,8 @@ startService(){
         --log-file $OBC_LOG_PATH/canjm_volt \
         --update-rate 0 \
         --jm-mode voltage \
-        can0 >> $OBC_LOG_PATH/el_canjm_volt.log 2>&1 &
+        --dump $OBC_LOG_PATH/voltcan_$(date +%Y%m%d_%H%M).dump \
+        can0 >> $OBC_LOG_PATH/el_canjm_volt_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid VoltCanService
 }

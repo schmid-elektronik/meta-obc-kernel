@@ -23,7 +23,8 @@ startService(){
         --log-file $OBC_LOG_PATH/canjm \
         --update-rate 0 \
         --jm-mode joule \
-        can0 >> $OBC_LOG_PATH/el_canjm.log 2>&1 &
+        --dump $OBC_LOG_PATH/canjm_$(date +%Y%m%d_%H%M).dump \
+        can0 >> $OBC_LOG_PATH/el_canjm_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid JmCanService
 }

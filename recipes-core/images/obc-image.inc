@@ -65,6 +65,7 @@ IMAGE_INSTALL_append = " \
                         iproute2 \
                         net-tools \
                         bash-completion \
+                        synclogs \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"

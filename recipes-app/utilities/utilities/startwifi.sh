@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG=/mnt/log/el_wlan.log
+LOG=/mnt/log/el_wlan_$(date +%Y%m%d_%H%M).log
 
 echo ======================= >> ${LOG}
 echo $(date) >> ${LOG}

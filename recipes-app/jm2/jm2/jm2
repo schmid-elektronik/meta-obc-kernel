@@ -22,8 +22,8 @@ startService(){
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/jm \
         --update-rate 0 \
-        --dump $OBC_LOG_PATH/jm.dump \
-        /dev/ttyUSB0 >> $OBC_LOG_PATH/el_jm.log 2>&1 &
+        --dump $OBC_LOG_PATH/jm_$(date +%Y%m%d_%H%M).dump \
+        /dev/ttyUSB0 >> $OBC_LOG_PATH/el_jm_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid JouleMeter
 }

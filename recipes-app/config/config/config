@@ -22,7 +22,7 @@ startService(){
         --obc $(getserial.sh -f)\
         --outfile $OBC_OBCCONF_FILE\
         --errorfile $OBC_ERROR_CONF_FILE\
-        --interval 60  >> $OBC_LOG_PATH/el_conf.log 2>&1 &
+        --interval 60  >> $OBC_LOG_PATH/el_conf_$(date +%Y%m%d_%H%M).log 2>&1 &
 }
 
 case $1 in

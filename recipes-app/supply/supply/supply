@@ -23,8 +23,8 @@ startService(){
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/ss \
         --update-rate 1 \
-        --dump $OBC_LOG_PATH/supply.dump \
-        /dev/null  >> $OBC_LOG_PATH/el_ss.log 2>&1 &
+        --dump $OBC_LOG_PATH/supply_$(date +%Y%m%d_%H%M).dump \
+        /dev/null  >> $OBC_LOG_PATH/el_ss_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid SupplyMeter
 }

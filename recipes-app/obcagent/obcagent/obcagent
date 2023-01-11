@@ -25,7 +25,7 @@ startService(){
         --log-level trace \
         --aaem-path $OBC_ERROR_CONF_FILE \
         --mqtt.root_ca_name $OBC_CA_FILE \
-        --log-file $OBC_LOG_PATH/agent >> $OBC_LOG_PATH/el_obd.log 2>&1 &
+        --log-file $OBC_LOG_PATH/agent >> $OBC_LOG_PATH/el_obd_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid OBCAgent
 }

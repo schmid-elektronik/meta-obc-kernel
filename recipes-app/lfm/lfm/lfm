@@ -22,8 +22,8 @@ startService(){
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/canlfm \
         --update-rate 0 \
-        --dump $OBC_LOG_PATH/lfm.dump \
-        can0 >> $OBC_LOG_PATH/el_canlfm.log 2>&1 &
+        --dump $OBC_LOG_PATH/lfm_$(date +%Y%m%d_%H%M).dump \
+        can0 >> $OBC_LOG_PATH/el_canlfm_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid LfmCanService
 }

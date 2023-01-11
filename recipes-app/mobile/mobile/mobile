@@ -24,8 +24,8 @@ startService(){
         --update-rate 1 \
         --hw-version ObcNxg \
         --mqtt.root_ca_name $OBC_CA_FILE \
-        --dump $OBC_LOG_PATH/ms.dump \
-        /dev/huaweiMobile  >> $OBC_LOG_PATH/el_ms.log 2>&1 &
+        --dump $OBC_LOG_PATH/ms_$(date +%Y%m%d_%H%M).dump \
+        /dev/huaweiMobile  >> $OBC_LOG_PATH/el_ms_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid MobileService
 }
