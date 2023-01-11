@@ -122,6 +122,7 @@ connect USB, Serial FTDI cable and Boot Jumper as in the picture
 If working on WSL, consider [connecting USB to WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
 
 ![](./doc/flash_connections.jpg)
+![](./doc/flash_bb.jpg)
 
 ```bash
 # Programmer Location = /home/karo/bin/stm32_cube_programmer
