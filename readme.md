@@ -89,6 +89,7 @@ once your set, it's easy..
 ```bash
 # on the prepared VM
 cd ~/obc-yocto/
+repo sync
 
 # set environment and build backbone
 DISTRO=obc-base MACHINE=qsmp-1570-bb source setup-environment build-obc-1570-bb/
