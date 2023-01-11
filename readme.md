@@ -39,8 +39,11 @@ repo sync
 # get laird releases: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/tag/LRD-REL-9.15.0.14
 laird-lwb5plus-sdio-sa-firmware-9.15.0.14.tar.bz2
 laird-lwb5plus-usb-sa-firmware-9.15.0.14.tar.bz2 
+
 # get obc-releases: https://github.com/schmid-elektronik/sh-p03-obc-services/releases
 obc-services-karo_1.1.8.tar.gz
+# check if we have the correct release version (here 1.1.8)
+cat ~/obc-yocto/layers/meta-obc-kernel/classes/obc_common.bbclass | grep obc-services-karo
 
 # set machine and build folder, initially you need to run it twice
 DISTRO=obc-base MACHINE=qsmp-1570-bb source setup-environment build-obc-1570-bb/
