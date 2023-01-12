@@ -22,7 +22,7 @@ startService(){
         --obd-path $OBC_LOG_PATH \
         --obc.ip_backbone 192.168.1.110 \
         --obc.ip_fin 192.168.1.112 \
-        --log-level trace \
+        --log-level warning \
         --aaem-path $OBC_ERROR_CONF_FILE \
         --mqtt.root_ca_name $OBC_CA_FILE \
         --log-file $OBC_LOG_PATH/agent >> $OBC_LOG_PATH/el_obd_$(date +%Y%m%d_%H%M).log 2>&1 &
