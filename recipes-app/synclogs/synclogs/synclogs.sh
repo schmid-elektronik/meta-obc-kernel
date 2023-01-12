@@ -2,8 +2,6 @@
 
 PATH=${PATH}:/app/bin:/app
 
-set -e
-
 source obc_common.sh
 
 if [[ $1 == "-h" ]]; then
@@ -24,12 +22,13 @@ main(){
     SYNCLOGFILE=el_sync_$(date +%Y%m%d_%H%M).log
 
     if [[ $1 == "--fin" ]]; then
+        # only find has obd files, backbone has sensor logs only
         startSyncTask obd*.log $RSYNC_INTERVALL >> $OBC_LOG_PATH/$SYNCLOGFILE 2>&1 &
     fi
 
     rsyncWatchdog $((${RSYNC_INTERVALL}*3)) >> $OBC_LOG_PATH/$SYNCLOGFILE 2>&1 &
 
-    removeOldFiles 24 >> $OBC_LOG_PATH/$SYNCLOGFILE 2>&1 &
+    removeOldFiles 24 >> $OBC_LOG_PATH/$SYNCLOGFILE 2>&1
 }
 
 # Sync File /mnt/log/$1 live to Server rsync
@@ -74,7 +73,7 @@ removeOldFiles(){ # max age in hour
         now_sec=$(date +%s)
 
         for file in $OBC_LOG_PATH/*; do
-            lastmodification_sec=$(stat -c '%Y' ${file##*/})
+            lastmodification_sec=$(stat -c '%Y' ${file})
             fileage_sec=$(($now_sec-$lastmodification_sec))
 
             if [ $fileage_sec -ge $maxage ]; then
