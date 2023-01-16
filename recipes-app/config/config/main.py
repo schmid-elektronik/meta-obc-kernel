@@ -17,15 +17,17 @@ if __name__ == '__main__':
     config_src = ini_file.get_config_source()
     boot_team_no = ini_file.get_teamno()
 
-    # get obd Json Error Description
-    ErrorDescription(
-        ini_file.get_error_description_source(),
-        options.getval('errorfile')
-    )
+    # get error descrioption only once
+    err_desc_success = False
 
     api = SemApi(options.getval('sn_bb'), options.getval('sn_obc'))
 
     while (True):
+        # get error description once
+        if( not err_desc_success):
+            err_desc = ErrorDescription()  # function object in py?
+            err_desc_success = err_desc.get(ini_file.get_error_description_source(), options.getval('errorfile'))
+
         # request config from source
         rx_config = api.get_ini_conf(config_src)
 
@@ -39,4 +41,3 @@ if __name__ == '__main__':
                 os.system('service obcagent restart')
 
         time.sleep(options.getval('interval'))
-

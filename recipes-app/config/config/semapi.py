@@ -122,6 +122,8 @@ class SemApi:
 
         if not conf or not conf['success']:
             print('[' + str(datetime.datetime.now()) + '] fail to get conf')
+            if(conf['ErrorMessage']):
+                print('[' + str(datetime.datetime.now()) + '] --> ' + conf['ErrorMessage'])
             return False
 
         # make configs comparable, timestamp always changes
