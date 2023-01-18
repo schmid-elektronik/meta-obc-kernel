@@ -15,20 +15,20 @@ class SemApi:
         get REST API Json string
         return config sting --> check 'success' field
         """
-        conf = {'success':False}
+        conf = {'success':False, 'ErrorMessage':"default error"}
 
         for addr in addrs:
             try:
                 r = requests.get(addr + "/" + str(bb))
             except Exception as e:
                 conf['ErrorMessage'] = 'GET failed from url: ' + addr
-                continue
+                return conf
 
             try:
                 conf = r.json()
             except Exception as e:
                 conf['ErrorMessage'] = 'No JSON at url: ' + r.url
-                continue
+                return conf
 
             if conf['success']:
                 conf['data']['ip_conf_active'] = r.url

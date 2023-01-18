@@ -39,5 +39,6 @@ if __name__ == '__main__':
             if(not str(boot_team_no) == str(api.get_team_no())):
                 print('[' + str(datetime.datetime.now()) + '] ' + 'new team number, restart OBC Agent')
                 os.system('service obcagent restart')
+                os.system('service health restart')
 
         time.sleep(options.getval('interval'))
