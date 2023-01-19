@@ -19,7 +19,7 @@ source obc_common.sh
 case $1 in
   start)
         echo -n "Starting ${DESC}: "
-        ${DESC}
+        ${DESC} &
         startwifi.sh &
   ;;
   stop)

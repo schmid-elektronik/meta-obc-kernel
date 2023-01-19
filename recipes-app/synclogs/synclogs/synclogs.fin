@@ -17,7 +17,7 @@ source obc_common.sh
 
 case $1 in
   start)
-        ${DESC} --fin
+        ${DESC} --fin &
   ;;
   status)
         ps -e | grep rsync
