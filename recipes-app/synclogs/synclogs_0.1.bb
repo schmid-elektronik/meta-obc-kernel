@@ -13,6 +13,7 @@ SRC_URI = " \
 "
 
 SRC_URI_append_qsmp-1570-fin  = " file://synclogs.fin "
+SRC_URI_append_qsmp-1530-bb  = " file://synclogs.bb "
 SRC_URI_append_qsmp-1570-bb  = " file://synclogs.bb "
 
 inherit update-rc.d
@@ -28,6 +29,12 @@ do_install_append_qsmp-1570-fin () {
     install -m 0755 ${WORKDIR}/synclogs.sh ${D}/${OBC_PATH_BIN}
 }
 
+do_install_append_qsmp-1530-bb () {
+    install -d ${D}${sysconfdir}/init.d
+
+    install -m 0755 ${WORKDIR}/synclogs.bb ${D}${sysconfdir}/init.d/synclogs
+    install -m 0755 ${WORKDIR}/synclogs.sh ${D}/${OBC_PATH_BIN}
+}
 do_install_append_qsmp-1570-bb () {
     install -d ${D}${sysconfdir}/init.d
 

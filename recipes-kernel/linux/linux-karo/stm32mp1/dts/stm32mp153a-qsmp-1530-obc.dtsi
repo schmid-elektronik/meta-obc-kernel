@@ -1,0 +1,99 @@
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/*
+ * Copyright (C) 2021 Martin Schweingruber <martin.schweingruber@schmid-elektronik.ch>
+ */
+
+#include "stm32mp153a-qsmp-1530.dts"
+#include "stm32mp15-karo-qsbase1.dtsi"
+#include "stm32mp15-qsmp-lcd-panel.dtsi"
+
+
+&rtc {
+    // disable on module RTC since it looses time when cutting power off
+	status = "disabled";
+};
+
+&lcd_panel {
+    status = "disabled";
+};
+/*
+&gpu {
+    status = "disabled";
+};
+*/
+
+&pinctrl {
+    obc_rmii_pin: rmii-0 {
+        pins1 {
+            pinmux = <STM32_PINMUX('G', 13, AF11)>, /* ETH1_RMII_TXD0 */
+                <STM32_PINMUX('G', 14, AF11)>, /* ETH1_RMII_TXD1 */
+                <STM32_PINMUX('B', 11, AF11)>, /* ETH1_RMII_TX_EN */
+                //<STM32_PINMUX('A', 1, AF0)>,  /* ETH_CLK */
+                <STM32_PINMUX('A', 1, AF11)>,    /* ETH1_RMII_REF_CLK */
+                <STM32_PINMUX('A', 2, AF11)>,  /* ETH1_MDIO */
+                <STM32_PINMUX('C', 1, AF11)>;  /* ETH1_MDC */
+            bias-disable;
+            drive-push-pull;
+            slew-rate = <2>;
+        };
+        pins2 {
+            pinmux = <STM32_PINMUX('C', 4, AF11)>,  /* ETH1_RMII_RXD0 */
+                <STM32_PINMUX('C', 5, AF11)>,  /* ETH1_RMII_RXD1 */
+                <STM32_PINMUX('A', 7, AF11)>;  /* ETH1_RMII_CRS_DV */
+            bias-disable;
+        };
+    };
+
+
+    obc_rmii_sleep_pin: rmii-sleep-0 {
+        pins1 {
+            pinmux = <STM32_PINMUX('G', 13, ANALOG)>, /* ETH1_RMII_TXD0 */
+                <STM32_PINMUX('G', 14, ANALOG)>, /* ETH1_RMII_TXD1 */
+                <STM32_PINMUX('B', 11, ANALOG)>, /* ETH1_RMII_TX_EN */
+                <STM32_PINMUX('A', 2, ANALOG)>,  /* ETH1_MDIO */
+                <STM32_PINMUX('C', 1, ANALOG)>,  /* ETH1_MDC */
+                <STM32_PINMUX('C', 4, ANALOG)>,  /* ETH1_RMII_RXD0 */
+                <STM32_PINMUX('C', 5, ANALOG)>,  /* ETH1_RMII_RXD1 */
+                <STM32_PINMUX('A', 1, ANALOG)>,  /* ETH1_RMII_REF_CLK */
+                <STM32_PINMUX('A', 7, ANALOG)>;  /* ETH1_RMII_CRS_DV */
+        };
+    };
+};
+
+&ethernet0 {
+    pinctrl-0 = <&obc_rmii_pin>;
+    pinctrl-1 = <&obc_rmii_sleep_pin>;
+
+    // provide reference clock to phy on ETH_CLK pad (PA1, AF0)
+    // st,eth-ref-clk-sel;
+
+    snps,reset-gpio = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
+    snps,reset-active-low;
+    snps,reset-delays-us = <0 10000 80000>;
+
+    phy-mode = "rmii";
+    // use own phy definition, phy0 is defined in karo layers (micrel, rgmii)
+    phy-handle = <&phy1>;
+};
+
+
+&mdio0 {
+    phy1: ethernet-phy@1 {
+        // use generic phy driver (just a random ID)
+        compatible = "ethernet-phy-idffff.fff0";
+
+        // that is the phy ID, loads dp83848 driver, seems not compatble to the phy
+        //compatible = "ethernet-phy-id2000.5c90";
+
+        // results in "no phy at addr", the stmmac does not accept it, why?
+        //compatible = "ethernet-phy-ieee802.3-c22";
+        reg = <1>;
+    };
+};
+
+// disable programming usb, this prevents kernel from probing it
+// probing the inexistent device confuses the usb subsystem
+// in that cat usb does not always find it's devices (usb-hub, laird module)
+&usbh_ehci {
+    status = "disabled";
+};

@@ -2,6 +2,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:${THISDIR}/${PN}/stm32mp1:"
 
 
 SRC_URI_append_stm32mp1 = " \
+    file://dts/stm32mp153a-qsmp-1530-obc.dtsi;subdir=git/arch/arm/boot \
+    file://dts/stm32mp153a-qsmp-1530-bb.dts;subdir=git/arch/arm/boot \
     file://dts/stm32mp157c-qsmp-1570-obc.dtsi;subdir=git/arch/arm/boot \
     file://dts/stm32mp157c-qsmp-1570-bb.dts;subdir=git/arch/arm/boot \
     file://dts/stm32mp157c-qsmp-1570-fin.dts;subdir=git/arch/arm/boot \
