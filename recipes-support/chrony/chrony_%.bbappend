@@ -9,6 +9,9 @@ SRC_URI_append_qsmp-1570-bb = " \
 "
 
 # for Fin chrony allow local devices to sync times 
+SRC_URI_append_qsmp-1530-fin = " \
+    file://chrony.conf.fin \
+"
 SRC_URI_append_qsmp-1570-fin = " \
     file://chrony.conf.fin \
 "
@@ -24,6 +27,11 @@ do_install_append_qsmp-1570-bb () {
     install -m 644 ${WORKDIR}/chrony.conf.bb ${D}${sysconfdir}/chrony.conf
 }
 
+do_install_append_qsmp-1530-fin () {
+    # Config file
+    install -d ${D}${sysconfdir}
+    install -m 644 ${WORKDIR}/chrony.conf.fin ${D}${sysconfdir}/chrony.conf
+}
 do_install_append_qsmp-1570-fin () {
     # Config file
     install -d ${D}${sysconfdir}

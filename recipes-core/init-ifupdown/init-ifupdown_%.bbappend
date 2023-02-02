@@ -24,6 +24,9 @@ do_install_append_qsmp-1570-bb () {
     install -m 0644 ${WORKDIR}/interfaces-bb ${D}${sysconfdir}/network/interfaces
 }
 
+do_install_append_qsmp-1530-fin () {
+    install -m 0644 ${WORKDIR}/interfaces-fin ${D}${sysconfdir}/network/interfaces
+}
 do_install_append_qsmp-1570-fin () {
     install -m 0644 ${WORKDIR}/interfaces-fin ${D}${sysconfdir}/network/interfaces
 }

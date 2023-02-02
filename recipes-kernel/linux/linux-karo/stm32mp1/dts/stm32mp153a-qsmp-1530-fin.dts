@@ -1,0 +1,53 @@
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/*
+ * Copyright (C) 2022 Roman Blöchliger <roman.bloechliger@schmid-elektronik.ch>
+ */
+
+
+#include "stm32mp153a-qsmp-1530-obc.dtsi"
+
+/ {
+	model = "QSMP-1530 module on OBC";
+
+	leds {
+        compatible = "gpio-leds";
+
+        green {
+            linux,default-trigger = "none";
+            gpios = <&gpioa 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 77 */
+            default-state = "on";
+        };
+
+        red {
+            linux,default-trigger = "none";
+            gpios = <&gpiod 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 76 */
+            default-state = "on";
+        };
+
+        blue {
+            linux,default-trigger = "none";
+            default-state = "on";
+            gpios = <&gpioi 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 75 */
+        };
+
+        yellow {
+            linux,default-trigger = "none";
+            gpios = <&gpioi 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 74 */
+            default-state = "on";
+        };
+
+    };
+
+};
+
+&i2c6 {
+    pcf8563: pcf8563@51 {
+        compatible = "nxp,pcf8563";
+        reg = <0x51>;
+        #clock-cells = <0>;
+        status = "okay";
+    };
+};
+
+
+
