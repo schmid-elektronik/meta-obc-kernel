@@ -22,6 +22,10 @@ SRC_URI_append = " \
     file://patch/obc-pinmux.patch \
 "
 
+SRC_URI_append_qsmp-1530-fin = " \
+    file://patch/obc-fin-wifi-sdio.patch \
+"
+
 KERNEL_FEATURES_append = " cfg/brcmwifi.cfg"
 KERNEL_FEATURES_append = " cfg/dp83848phy.cfg"
 KERNEL_FEATURES_append = " cfg/rtc.cfg"

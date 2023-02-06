@@ -18,8 +18,15 @@ IMAGE_INSTALL_append = " \
     config \
     utilities \
     kernel-module-lwb5p-backports-laird \
-    lwb5plus-usb-sa-firmware \
     sterling-supplicant-lwb \
+"
+
+IMAGE_INSTALL_append_qsmp-1530-fin = " \
+    lwb5plus-sdio-sa-firmware \
+"
+
+IMAGE_INSTALL_append_qsmp-1570-fin = " \
+    lwb5plus-usb-sa-firmware \
 "
 
 # wifi regulatory domain, use on of US, CA(canada), ETSI(europe), JP, AU, NZ

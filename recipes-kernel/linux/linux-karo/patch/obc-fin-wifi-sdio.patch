@@ -1,0 +1,22 @@
+diff --git a/arch/arm/boot/dts/stm32mp153a-qsmp-1530-fin.dts b/arch/arm/boot/dts/stm32mp153a-qsmp-1530-fin.dts
+index aae73e2ffe2a..895b9a1788d5 100644
+--- a/arch/arm/boot/dts/stm32mp153a-qsmp-1530-fin.dts
++++ b/arch/arm/boot/dts/stm32mp153a-qsmp-1530-fin.dts
+@@ -49,5 +49,15 @@ pcf8563: pcf8563@51 {
+     };
+ };
+ 
+-
+-
++&sdmmc1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	non-removable;
++	status = "okay";
++	brcmf: wifi@1 {
++		reg = <1>;
++		compatible = "brcm,bcm4329-fmac";
++		laird,regdomain = "ETSI";
++		status = "okay";
++	};
++};
