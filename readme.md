@@ -35,7 +35,7 @@ cd obc-yocto
 repo init -u https://github.com/schmid-elektronik/karo-bsp -b gatesgarth
 repo sync
 
-# copy following files to  <home>/obc-yocto/release
+# copy following files to  <home>/obc-yocto/release -> NOT required!
 # get laird releases: https://github.com/LairdCP/Sterling-LWB-and-LWB5-Release-Packages/releases/tag/LRD-REL-9.15.0.14
 laird-lwb5plus-sdio-sa-firmware-9.15.0.14.tar.bz2
 laird-lwb5plus-usb-sa-firmware-9.15.0.14.tar.bz2 
@@ -50,8 +50,8 @@ DISTRO=obc-base MACHINE=qsmp-1570-bb source setup-environment build-obc-1570-bb/
 
 # setup "global" cache- and download-directory (you could set path to a network share)
 # in conf/local.conf
-DL_DIR ?= "/home/mas/yoctocache/downloads"
-SSTATE_DIR ?= "/home/mas/yoctocache/sstate-cache"
+DL_DIR ?= "${HOME}/yoctocache/downloads"
+SSTATE_DIR ?= "${HOME}/yoctocache/sstate-cache"
 
 # add the KARO cache
 SSTATE_MIRRORS ?= "\
