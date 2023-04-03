@@ -9,38 +9,79 @@
     
 	leds {
         compatible = "gpio-leds";
-        
+
         can0 {
             linux,default-trigger = "none";
-            gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 77 */
-            default-state = "on";
+            gpios = <&gpioa 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 77: CAN1-ON */
+            default-state = "off";
         };
 
         can1 {
             linux,default-trigger = "none";
-            gpios = <&gpiod 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 76 */
-            default-state = "off";
+            gpios = <&gpiod 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 76: CAN2-ON */
+            default-state = "on";
         };
 
-        relay {
+        relay_on {
             linux,default-trigger = "none";
-            default-state = "on";
-            gpios = <&gpioi 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; /* Pin 75 */
+            default-state = "off";
+            gpios = <&gpioi 6 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>; /* Pin 75: !RELAY-ON */
         };
 
         button {
             linux,default-trigger = "none";
-            gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74 */
+            gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74: ON-OFF-BUTTON */
         };
 
         on24 {
             linux,default-trigger = "none";
-            gpios = <&gpiof 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 70 */
+            gpios = <&gpiog 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 70: +24V-ON */
+            default-state = "off";
         };
 
         on5 {
             linux,default-trigger = "none";
-            gpios = <&gpioi 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 69 */
+            gpios = <&gpioi 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 69: +5V-ON */
+            default-state = "off";
+        };
+
+        charge_off {
+            linux,default-trigger = "none";
+            gpios = <&gpioe 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 63: !CHG_OFF */
+            default-state = "off";
+        };
+
+        reduce_charge_current {
+            linux,default-trigger = "none";
+            gpios = <&gpioh 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 66: REDCHGCURR */
+            default-state = "on";
+        };
+
+        uart2_driver_enable {
+            linux,default-trigger = "none";
+            gpios = <&gpioi 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 67: UART2_DE */
+            default-state = "off";
+        };
+
+        uart2_receiver_enable {
+            linux,default-trigger = "none";
+            gpios = <&gpioi 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 68: !UART2_RE */
+            default-state = "off";
+        };
+
+        fault {
+            linux,default-trigger = "none";
+            gpios = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 71: !FAULT */
+        };
+
+        charging {
+            linux,default-trigger = "none";
+            gpios = <&gpiod 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 72: !CHG */
+        };
+
+        power_good {
+            linux,default-trigger = "none";
+            gpios = <&gpioi 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 73: PGOOD */
         };
     };
 
