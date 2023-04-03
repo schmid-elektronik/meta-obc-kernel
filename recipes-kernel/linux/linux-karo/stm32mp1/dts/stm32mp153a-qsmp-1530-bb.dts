@@ -10,13 +10,13 @@
 	leds {
         compatible = "gpio-leds";
 
-        can0 {
+        can1 {
             linux,default-trigger = "none";
             gpios = <&gpioa 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 77: CAN1-ON */
             default-state = "off";
         };
 
-        can1 {
+        can2 {
             linux,default-trigger = "none";
             gpios = <&gpiod 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 76: CAN2-ON */
             default-state = "on";
