@@ -62,9 +62,9 @@
     // provide reference clock to phy on ETH_CLK pad (PA1, AF0)
     // st,eth-ref-clk-sel;
 
-    snps,reset-gpio = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
-    snps,reset-active-low;
-    snps,reset-delays-us = <0 10000 80000>;
+    // snps,reset-gpio = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
+    // snps,reset-active-low;
+    // snps,reset-delays-us = <0 10000 80000>;
 
     phy-mode = "rmii";
     // use own phy definition, phy0 is defined in karo layers (micrel, rgmii)
