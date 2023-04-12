@@ -28,11 +28,6 @@
             gpios = <&gpioi 6 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>; /* Pin 75: !RELAY-ON */
         };
 
-        button {
-            linux,default-trigger = "none";
-            gpios = <&gpioi 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 74: ON-OFF-BUTTON */
-        };
-
         on24 {
             linux,default-trigger = "none";
             gpios = <&gpiog 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 70: +24V-ON */
@@ -67,21 +62,6 @@
             linux,default-trigger = "none";
             gpios = <&gpioi 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 68: !UART2_RE */
             default-state = "off";
-        };
-
-        fault {
-            linux,default-trigger = "none";
-            gpios = <&gpiog 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 71: !FAULT */
-        };
-
-        charging {
-            linux,default-trigger = "none";
-            gpios = <&gpiod 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 72: !CHG */
-        };
-
-        power_good {
-            linux,default-trigger = "none";
-            gpios = <&gpioi 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 73: PGOOD */
         };
     };
 
