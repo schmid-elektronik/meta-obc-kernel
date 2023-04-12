@@ -66,6 +66,7 @@ IMAGE_INSTALL_append = " \
                         net-tools \
                         bash-completion \
                         synclogs \
+                        vim \
 "
 
 DEPENDS_append = " cross-localedef-native qemuwrapper-cross"
