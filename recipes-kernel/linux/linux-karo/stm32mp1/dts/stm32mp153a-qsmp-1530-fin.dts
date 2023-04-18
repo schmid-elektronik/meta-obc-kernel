@@ -72,3 +72,23 @@
         };
 };
 
+// spi pins are used as adc input
+&spi6 {
+        status = "disabled";
+};
+
+&adc {
+        vdd-supply = <&reg_3v3>;
+        vdda-supply = <&reg_3v3>;
+        // "somebody" writes reg_3v3 to vref
+        // so set vrefbuf (2.5V)
+        vref-supply = <&vrefbuf>;
+        status = "okay";
+};
+
+&adc2 {
+    // ADC2, Channel 3 (PIN 98)
+    st,adc-channels = <3>;
+    st,min-sample-time-nsecs = <5000>;
+};
+
