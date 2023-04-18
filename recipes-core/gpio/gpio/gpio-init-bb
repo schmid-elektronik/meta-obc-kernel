@@ -1,0 +1,43 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          gpio
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description:
+# Description:
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
+DESC=GPIOService
+
+set -e
+
+
+case $1 in
+  start)
+        echo "Exporting ${DESC}"
+        echo 106 > /sys/class/gpio/export
+	echo in > /sys/class/gpio/gpio106/direction
+  ;;
+  stop)
+        echo "Unexporting ${DESC}"
+	echo 106 > /sys/class/gpio/unexport
+  ;;
+  restart|force-reload)
+        $0 stop
+        $0 start
+  ;;
+  status)
+	ls -al /sys/class/gpio/ | grep gpio | sed 's/->.*//g' | grep -v gpiochip
+   ;;
+   *)
+        echo "Usage: ${DESC} {start|stop|restart|force-reload|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim:noet
