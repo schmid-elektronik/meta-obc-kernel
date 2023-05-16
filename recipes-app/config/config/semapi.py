@@ -56,6 +56,7 @@ class SemApi:
         c['team']['JM3'] = '1' if ( webconfig['data']['required_sensor'].find('JM3') >=0 ) else '0'
         c['team']['VOLT'] = '1' if ( webconfig['data']['required_sensor'].find('VOLT') >=0 ) else '0'
         c['team']['LFM'] = '1' if ( webconfig['data']['required_sensor'].find('LFM') >=0 ) else '0'
+        c['team']['SB'] = '1' if ( webconfig['data']['required_sensor'].find('SB') >=0 ) else '0'
         c['team']['EngyAlwceSensor'] = webconfig['data']['allowance_sensor']
         c['team']['subcategory'] = webconfig['data']['subcategory']
         c['team']['category'] = webconfig['data']['category']
@@ -97,6 +98,10 @@ class SemApi:
         c['mqtt']['port_broker'] = 8883
         c['mqtt']['data_interval'] = 1000
         c['mqtt']['health_interval'] = 30000
+        c['mqtt']['root_ca_path'] = ''
+        c['mqtt']['root_ca_name'] = '/app/conf/ca.crt'
+        c['mqtt']['cert_name'] = ''
+        c['mqtt']['key_name'] = ''
 
         # configuration serial number, dataversion
         c['manufacturer']['InternalSerialNo_device'] = self.bb
