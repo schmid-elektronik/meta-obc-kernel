@@ -1,0 +1,56 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          sb
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description:
+# Description:
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/app/bin:/app
+DESC=SbCanService
+
+set -e
+
+source obc_common.sh
+
+startService(){
+    SbCanService\
+        -p 3015 \
+        -c $OBC_OBCCONF_FILE \
+        --log-file $OBC_LOG_PATH/cansb \
+        --update-rate 0 \
+        --dump $OBC_LOG_PATH/canjm_$(date +%Y%m%d_%H%M).dump \
+        can0 >> $OBC_LOG_PATH/el_cansb_$(date +%Y%m%d_%H%M).log 2>&1 &
+        pid=$!
+        printAllPid SbCanService
+}
+
+case $1 in
+  start)
+        echo -n "Starting ${DESC}: "
+        startService
+  ;;
+  stop)
+        echo "Stopping ${DESC}: "
+        ps -e | grep ${DESC}
+        pkill ${DESC}
+  ;;
+  restart|force-reload)
+        $0 stop
+        $0 start
+  ;;
+  status)
+        ps -e | grep ${DESC}
+   ;;
+   *)
+        echo "Usage: ${DESC} {start|stop|restart|force-reload|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim:noet
