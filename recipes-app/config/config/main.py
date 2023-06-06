@@ -1,3 +1,5 @@
+import os
+import subprocess
 import datetime
 
 from cmdargs import CmdArgs
@@ -34,6 +36,10 @@ if __name__ == '__main__':
         if(rx_config):
             ini_file.write(rx_config)
             print('[' + str(datetime.datetime.now()) + '] ' + 'new config received')
+            print('[' + str(datetime.datetime.now()) + '] ' + 'copy to backbone...')
+
+            p = subprocess.Popen(["scp", "-o", "StrictHostKeyChecking=accept-new", options.getval('outfile'), "root@192.168.1.110:"+ options.getval('outfile')])
+            sts = os.waitpid(p.pid, 0)
 
             # reboot on Teamno change
             if(not str(boot_team_no) == str(api.get_team_no())):
