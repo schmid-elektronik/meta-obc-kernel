@@ -10,5 +10,13 @@ alias cfg='cd /app/conf'
 alias bin='cd /app/bin'
 alias log='cd /mnt/log'
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-cd /app/bin
+MACHINE=`uname -n`
+
+if [[ $MACHINE == *"1530"* ]]; then
+	echo "Welcome on $MACHINE (HW v1.1)"
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+
+	echo "Welcome on $MACHINE (HW v1.0)"
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+fi
