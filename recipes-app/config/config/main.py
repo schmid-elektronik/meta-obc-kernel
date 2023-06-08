@@ -38,6 +38,9 @@ if __name__ == '__main__':
             print('[' + str(datetime.datetime.now()) + '] ' + 'new config received')
             print('[' + str(datetime.datetime.now()) + '] ' + 'copy to backbone...')
 
+            # in case of different fingerprint due bb image update
+            p = subprocess.Popen(["rm", "/root/.ssh/known_hosts"])
+            sts = os.waitpid(p.pid, 0)
             p = subprocess.Popen(["scp", "-o", "StrictHostKeyChecking=accept-new", options.getval('outfile'), "root@192.168.1.110:"+ options.getval('outfile')])
             sts = os.waitpid(p.pid, 0)
 
