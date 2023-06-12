@@ -20,7 +20,6 @@ startService(){
     HealthAgent\
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/health \
-        --hw-version ObcNxg \
         >> $OBC_LOG_PATH/el_health_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
         printAllPid HealthAgent

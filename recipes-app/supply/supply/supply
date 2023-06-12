@@ -19,7 +19,6 @@ source obc_common.sh
 startService(){
     SupplyMeterService\
         -p 3014 \
-        --hw-version ObcNxg \
         -c $OBC_OBCCONF_FILE \
         --log-file $OBC_LOG_PATH/ss \
         --update-rate 1 \

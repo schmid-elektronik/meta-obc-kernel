@@ -23,7 +23,6 @@ startService(){
         --log-file $OBC_LOG_PATH/ds \
         --update-rate 10 \
         --flush \
-        --hw-version ObcNgx \
         --dump $OBC_LOG_PATH/dio_$(date +%Y%m%d_%H%M).dump \
         /dev/i2c-1  >> $OBC_LOG_PATH/el_ds_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
