@@ -9,6 +9,7 @@ alias pso='ps -ef | grep obc'
 alias cfg='cd /app/conf'
 alias bin='cd /app/bin'
 alias log='cd /mnt/log'
+alias conf='vi /app/conf/obc.cnf'
 
 MACHINE=`uname -n`
 
