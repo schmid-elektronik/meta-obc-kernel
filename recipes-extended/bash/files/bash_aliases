@@ -10,6 +10,8 @@ alias cfg='cd /app/conf'
 alias bin='cd /app/bin'
 alias log='cd /mnt/log'
 alias conf='vi /app/conf/obc.cnf'
+alias cconf='cat /app/conf/obc.cnf'
+alias pse='ps -ef | grep'
 
 MACHINE=`uname -n`
 
