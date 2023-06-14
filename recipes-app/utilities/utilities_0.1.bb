@@ -45,6 +45,10 @@ do_install_append_qsmp-1570-fin () {
     install -m 0755 ${WORKDIR}/startwifi.sh ${D}/${OBC_PATH_BIN}
 }
 
+do_install_append_qsmp-1530-fin () {
+    install -m 0755 ${WORKDIR}/startwifi.sh ${D}/${OBC_PATH_BIN}
+}
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} += "${sysconfdir}"

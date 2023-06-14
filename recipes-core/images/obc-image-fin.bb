@@ -22,7 +22,7 @@ IMAGE_INSTALL_append = " \
 "
 
 IMAGE_INSTALL_append_qsmp-1530-fin = " \
-    lwb5plus-sdio-sa-firmware \
+    lwb5plus-usb-sa-firmware \
 "
 
 IMAGE_INSTALL_append_qsmp-1570-fin = " \
