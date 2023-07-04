@@ -67,6 +67,7 @@ IMAGE_INSTALL_append = " \
                         bash-completion \
                         synclogs \
                         vim \
+                        netcat \
                         os-release \
 "
 
