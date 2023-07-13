@@ -8,6 +8,7 @@ IMAGE_LINGUAS = "en-us"
 IMAGE_FEATURES_append = " ssh-server-openssh package-management"
 
 IMAGE_INSTALL_append = " \
+    dout \
     gasflow \
     jm2 \
     jmcan \

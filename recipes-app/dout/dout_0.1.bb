@@ -22,7 +22,7 @@ do_install () {
     install -d ${D}${sysconfdir}/init.d
 
     install -m 0755 ${WORKDIR}/dout ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/DoutService ${D}/${OBC_PATH_BIN}
+    install -m 0755 ${WORKDIR}/DoutServiceNxg ${D}/${OBC_PATH_BIN}/DoutService
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
