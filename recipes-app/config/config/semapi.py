@@ -69,6 +69,9 @@ class SemApi:
         c['team']['AllEnergyLFM'] = webconfig['data']['AllEnergyLFM']
         c['team']['ConfOk'] = 1
 
+        if 'LFMTempFix' in webconfig['data'] :
+            c['team']['LfmTempFix'] = webconfig['data']['LFMTempFix']
+
         # obc related configuration
         c['obc']['use_wifi'] = webconfig['data']['use_wifi']
 
@@ -83,6 +86,11 @@ class SemApi:
         c['obc']['ip_conf_active'] = webconfig['data']['ip_conf_active']
         c['obc']['ip_conf_time'] = webconfig['data']['ip_conf_time']
         c['obc']['required_fw'] = webconfig['data']['required_fw']
+        c['obc']['required_jm_fw'] = webconfig['data']['required_jm_fw']
+        c['obc']['required_vm_fw'] = webconfig['data']['required_vm_fw']
+        c['obc']['required_lfm_fw'] = webconfig['data']['required_lfm_fw']
+        c['obc']['required_sb_fw'] = webconfig['data']['required_sb_fw']
+        c['obc']['required_gfm_fw'] = webconfig['data']['required_gfs_fw']
         c['obc']['ip_update'] = webconfig['data']['ip_update']
         c['obc']['ip_error_conf'] = 'https://manager.sem-app.com/obd_error.json'
         c['obc']['ip_log'] = webconfig['data']['ip_log']
@@ -126,7 +134,7 @@ class SemApi:
         conf = self.__request_conf(self.bb, addrs)
 
         if not conf or not conf['success']:
-            print('[' + str(datetime.datetime.now()) + '] fail to get conf')
+            print('[' + str(datetime.datetime.now()) + '] failed to get conf')
             if(conf['ErrorMessage']):
                 print('[' + str(datetime.datetime.now()) + '] --> ' + conf['ErrorMessage'])
             return False
