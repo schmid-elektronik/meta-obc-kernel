@@ -22,7 +22,7 @@ OBC_PATH_LOG = "/mnt/log"
 # archives are automatically extcted in do_unpack
 # [Fetching code](https://docs.yoctoproject.org/singleindex.html#fetching-code)
 SRC_URI_append = " \
-    file:///${BSPDIR}/release/obc-services-karo_1.1.12.tar.gz \
+    file:///${BSPDIR}/release/obc-services-karo_1.1.16.tar.gz \
 "
 
 do_install_prepend () {
