@@ -40,10 +40,10 @@
             default-state = "off";
         };
 
-        charge_off {
+        charge_on {
             linux,default-trigger = "none";
-            gpios = <&gpioe 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 63: !CHG_OFF */
-            default-state = "off";
+            gpios = <&gpioe 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 63: !CHG_OFF */
+            default-state = "on";
         };
 
         reduce_charge_current {
@@ -52,13 +52,13 @@
             default-state = "on";
         };
 
-        uart2_driver_enable {
+        uart2_tx_enable {
             linux,default-trigger = "none";
             gpios = <&gpioi 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Pin 67: UART2_DE */
             default-state = "off";
         };
 
-        uart2_receiver_enable {
+        uart2_rx_enable {
             linux,default-trigger = "none";
             gpios = <&gpioi 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* Pin 68: !UART2_RE */
             default-state = "off";
