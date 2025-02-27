@@ -26,25 +26,41 @@ startService(){
         --dump $OBC_LOG_PATH/canjm_$(date +%Y%m%d_%H%M).dump \
         can0 >> $OBC_LOG_PATH/el_canjm_$(date +%Y%m%d_%H%M).log 2>&1 &
         pid=$!
-        printAllPid JmCanService
+        echo "PID $pid"
 }
 
 case $1 in
   start)
         echo -n "Starting ${DESC}: "
-        startService
+        PID=$(pidof $DESC || true)
+        if [[ -n "$PID" ]]; then
+          echo "Process already running with PID $PID"
+        else
+          startService
+        fi
   ;;
   stop)
-        echo "Stopping ${DESC}: "
-        ps -e | grep ${DESC}
-        pkill ${DESC}
+        echo -n "Stopping ${DESC}: "
+        PID=$(pidof $DESC || true)
+        if [[ -n "$PID" ]]; then
+          echo "PID $PID"
+          kill $PID
+        else
+          echo "No running process found"
+        fi
   ;;
   restart|force-reload)
         $0 stop
         $0 start
   ;;
   status)
-        ps -e | grep ${DESC}
+        echo -n "Status ${DESC}: "
+        PID=$(pidof $DESC || true)
+        if [[ -n "$PID" ]]; then
+          echo "RUNNING with PID ${PID}"
+        else
+          echo "NOT RUNNING"
+        fi
    ;;
    *)
         echo "Usage: ${DESC} {start|stop|restart|force-reload|status}" >&2
